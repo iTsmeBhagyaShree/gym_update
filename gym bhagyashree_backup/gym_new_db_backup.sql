@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2026 at 01:41 PM
+-- Generation Time: Jun 26, 2026 at 11:22 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -550,17 +550,17 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`id`, `adminId`, `fullName`, `email`, `phone`, `gender`, `source`, `status`, `assignedToStaffId`, `notes`, `createdAt`, `updatedAt`, `branchId`, `followUpDate`) VALUES
-(1, 90, 'vaani', 'vaani@gmail.com', '7788994457', 'Female', 'Website', 'Converted', NULL, 'wdfgh', '2026-06-05 14:31:44.000', '2026-06-08 18:08:13.000', NULL, NULL),
-(11, 90, 'abc', 'abc@gmail.com', '1111112222', 'Male', 'Website', 'Converted', 26, NULL, '2026-06-08 15:50:21.000', '2026-06-08 15:52:49.000', 48, '2026-06-01 00:00:00.000'),
-(12, 90, 'Dummy Lead 1', 'dummy.lead1@example.com', '9000000001', 'Male', 'Landing Page', 'Converted', 26, 'Dummy lead #1 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 16:17:54.000', 48, NULL),
-(13, 90, 'Dummy Lead 2', 'dummy.lead2@example.com', '9000000002', 'Female', 'Landing Page', 'New', 26, 'Dummy lead #2 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(14, 90, 'Dummy Lead 3', 'dummy.lead3@example.com', '9000000003', 'Male', 'Landing Page', 'New', 26, 'Dummy lead #3 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(15, 90, 'Dummy Lead 4', 'dummy.lead4@example.com', '9000000004', 'Female', 'Landing Page', 'New', 26, 'Dummy lead #4 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(16, 90, 'Dummy Lead 5', 'dummy.lead5@example.com', '9000000005', 'Male', 'Landing Page', 'New', 26, 'Dummy lead #5 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(17, 90, 'Dummy Lead 6', 'dummy.lead6@example.com', '9000000006', 'Female', 'Landing Page', 'New', 26, 'Dummy lead #6 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(18, 90, 'Dummy Lead 7', 'dummy.lead7@example.com', '9000000007', 'Male', 'Landing Page', 'New', 26, 'Dummy lead #7 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(19, 90, 'Dummy Lead 8', 'dummy.lead8@example.com', '9000000008', 'Female', 'Landing Page', 'New', 26, 'Dummy lead #8 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(20, 90, 'Dummy Lead 9', 'dummy.lead9@example.com', '9000000009', 'Male', 'Landing Page', 'New', 26, 'Dummy lead #9 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(1, 90, 'vaani', 'vaani@gmail.com', '7788994457', 'Female', 'Website', 'Converted', 51, 'wdfgh', '2026-06-05 14:31:44.000', '2026-06-08 18:08:13.000', NULL, NULL),
+(11, 90, 'abc', 'abc@gmail.com', '1111112222', 'Male', 'Website', 'Converted', 25, NULL, '2026-06-08 15:50:21.000', '2026-06-08 15:52:49.000', 48, '2026-06-01 00:00:00.000'),
+(12, 90, 'Dummy Lead 1', 'dummy.lead1@example.com', '9000000001', 'Male', 'Landing Page', 'Converted', NULL, 'Dummy lead #1 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-17 14:33:22.000', 48, NULL),
+(13, 90, 'Dummy Lead 2', 'dummy.lead2@example.com', '9000000002', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #2 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(14, 90, 'Dummy Lead 3', 'dummy.lead3@example.com', '9000000003', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #3 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(15, 90, 'Dummy Lead 4', 'dummy.lead4@example.com', '9000000004', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #4 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(16, 90, 'Dummy Lead 5', 'dummy.lead5@example.com', '9000000005', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #5 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(17, 90, 'Dummy Lead 6', 'dummy.lead6@example.com', '9000000006', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #6 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(18, 90, 'Dummy Lead 7', 'dummy.lead7@example.com', '9000000007', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #7 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(19, 90, 'Dummy Lead 8', 'dummy.lead8@example.com', '9000000008', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #8 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(20, 90, 'Dummy Lead 9', 'dummy.lead9@example.com', '9000000009', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #9 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
 (21, 90, 'Dummy Lead 10', 'dummy.lead10@example.com', '9000000010', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #10 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
 (22, 90, 'Dummy Lead 11', 'dummy.lead11@example.com', '9000000011', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #11 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
 (23, 90, 'Dummy Lead 12', 'dummy.lead12@example.com', '9000000012', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #12 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
@@ -571,37 +571,37 @@ INSERT INTO `leads` (`id`, `adminId`, `fullName`, `email`, `phone`, `gender`, `s
 (28, 90, 'Dummy Lead 17', 'dummy.lead17@example.com', '9000000017', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #17 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
 (29, 90, 'Dummy Lead 18', 'dummy.lead18@example.com', '9000000018', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #18 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
 (30, 90, 'Dummy Lead 19', 'dummy.lead19@example.com', '9000000019', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #19 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(31, 90, 'Dummy Lead 20', 'dummy.lead20@example.com', '9000000020', 'Female', 'Landing Page', 'New', 56, 'Dummy lead #20 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(32, 90, 'Dummy Lead 21', 'dummy.lead21@example.com', '9000000021', 'Male', 'Landing Page', 'New', 56, 'Dummy lead #21 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(33, 90, 'Dummy Lead 22', 'dummy.lead22@example.com', '9000000022', 'Female', 'Landing Page', 'New', 56, 'Dummy lead #22 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(34, 90, 'Dummy Lead 23', 'dummy.lead23@example.com', '9000000023', 'Male', 'Landing Page', 'New', 56, 'Dummy lead #23 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(35, 90, 'Dummy Lead 24', 'dummy.lead24@example.com', '9000000024', 'Female', 'Landing Page', 'New', 56, 'Dummy lead #24 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(36, 90, 'Dummy Lead 25', 'dummy.lead25@example.com', '9000000025', 'Male', 'Landing Page', 'New', 56, 'Dummy lead #25 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
-(37, 90, 'Dummy Lead 26', 'dummy.lead26@example.com', '9000000026', 'Female', 'Landing Page', 'New', 56, 'Dummy lead #26 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
-(38, 90, 'Dummy Lead 27', 'dummy.lead27@example.com', '9000000027', 'Male', 'Landing Page', 'New', 56, 'Dummy lead #27 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
-(39, 90, 'Dummy Lead 28', 'dummy.lead28@example.com', '9000000028', 'Female', 'Landing Page', 'New', 56, 'Dummy lead #28 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
-(40, 90, 'Dummy Lead 29', 'dummy.lead29@example.com', '9000000029', 'Male', 'Landing Page', 'New', 56, 'Dummy lead #29 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
-(41, 90, 'Dummy Lead 30', 'dummy.lead30@example.com', '9000000030', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #30 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
-(42, 90, 'Dummy Lead 31', 'dummy.lead31@example.com', '9000000031', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #31 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(43, 90, 'Dummy Lead 32', 'dummy.lead32@example.com', '9000000032', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #32 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(44, 90, 'Dummy Lead 33', 'dummy.lead33@example.com', '9000000033', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #33 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(45, 90, 'Dummy Lead 34', 'dummy.lead34@example.com', '9000000034', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #34 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(46, 90, 'Dummy Lead 35', 'dummy.lead35@example.com', '9000000035', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #35 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(47, 90, 'Dummy Lead 36', 'dummy.lead36@example.com', '9000000036', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #36 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(48, 90, 'Dummy Lead 37', 'dummy.lead37@example.com', '9000000037', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #37 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(49, 90, 'Dummy Lead 38', 'dummy.lead38@example.com', '9000000038', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #38 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(50, 90, 'Dummy Lead 39', 'dummy.lead39@example.com', '9000000039', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #39 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(51, 90, 'Dummy Lead 40', 'dummy.lead40@example.com', '9000000040', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #40 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
-(52, 90, 'Dummy Lead 41', 'dummy.lead41@example.com', '9000000041', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #41 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
-(53, 90, 'Dummy Lead 42', 'dummy.lead42@example.com', '9000000042', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #42 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
-(54, 90, 'Dummy Lead 43', 'dummy.lead43@example.com', '9000000043', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #43 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
-(55, 90, 'Dummy Lead 44', 'dummy.lead44@example.com', '9000000044', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #44 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 16:17:54.000', 48, NULL),
-(56, 90, 'Dummy Lead 45', 'dummy.lead45@example.com', '9000000045', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #45 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 16:17:54.000', 48, NULL),
-(57, 90, 'Dummy Lead 46', 'dummy.lead46@example.com', '9000000046', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #46 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 16:17:54.000', 48, NULL),
-(58, 90, 'Dummy Lead 47', 'dummy.lead47@example.com', '9000000047', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #47 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
-(59, 90, 'Dummy Lead 48', 'dummy.lead48@example.com', '9000000048', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #48 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
-(60, 90, 'Dummy Lead 49', 'dummy.lead49@example.com', '9000000049', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #49 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
-(61, 90, 'Dummy Lead 50', 'dummy.lead50@example.com', '9000000050', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #50 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(31, 90, 'Dummy Lead 20', 'dummy.lead20@example.com', '9000000020', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #20 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(32, 90, 'Dummy Lead 21', 'dummy.lead21@example.com', '9000000021', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #21 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(33, 90, 'Dummy Lead 22', 'dummy.lead22@example.com', '9000000022', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #22 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(34, 90, 'Dummy Lead 23', 'dummy.lead23@example.com', '9000000023', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #23 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(35, 90, 'Dummy Lead 24', 'dummy.lead24@example.com', '9000000024', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #24 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(36, 90, 'Dummy Lead 25', 'dummy.lead25@example.com', '9000000025', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #25 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
+(37, 90, 'Dummy Lead 26', 'dummy.lead26@example.com', '9000000026', 'Female', 'Landing Page', 'New', 53, 'Dummy lead #26 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
+(38, 90, 'Dummy Lead 27', 'dummy.lead27@example.com', '9000000027', 'Male', 'Landing Page', 'New', 53, 'Dummy lead #27 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
+(39, 90, 'Dummy Lead 28', 'dummy.lead28@example.com', '9000000028', 'Female', 'Landing Page', 'New', 53, 'Dummy lead #28 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
+(40, 90, 'Dummy Lead 29', 'dummy.lead29@example.com', '9000000029', 'Male', 'Landing Page', 'New', 53, 'Dummy lead #29 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
+(41, 90, 'Dummy Lead 30', 'dummy.lead30@example.com', '9000000030', 'Female', 'Landing Page', 'New', 53, 'Dummy lead #30 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
+(42, 90, 'Dummy Lead 31', 'dummy.lead31@example.com', '9000000031', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #31 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(43, 90, 'Dummy Lead 32', 'dummy.lead32@example.com', '9000000032', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #32 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(44, 90, 'Dummy Lead 33', 'dummy.lead33@example.com', '9000000033', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #33 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(45, 90, 'Dummy Lead 34', 'dummy.lead34@example.com', '9000000034', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #34 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(46, 90, 'Dummy Lead 35', 'dummy.lead35@example.com', '9000000035', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #35 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(47, 90, 'Dummy Lead 36', 'dummy.lead36@example.com', '9000000036', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #36 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(48, 90, 'Dummy Lead 37', 'dummy.lead37@example.com', '9000000037', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #37 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(49, 90, 'Dummy Lead 38', 'dummy.lead38@example.com', '9000000038', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #38 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(50, 90, 'Dummy Lead 39', 'dummy.lead39@example.com', '9000000039', 'Male', 'Landing Page', 'New', 51, 'Dummy lead #39 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(51, 90, 'Dummy Lead 40', 'dummy.lead40@example.com', '9000000040', 'Female', 'Landing Page', 'New', 53, 'Dummy lead #40 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
+(52, 90, 'Dummy Lead 41', 'dummy.lead41@example.com', '9000000041', 'Male', 'Landing Page', 'New', 53, 'Dummy lead #41 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
+(53, 90, 'Dummy Lead 42', 'dummy.lead42@example.com', '9000000042', 'Female', 'Landing Page', 'New', 53, 'Dummy lead #42 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
+(54, 90, 'Dummy Lead 43', 'dummy.lead43@example.com', '9000000043', 'Male', 'Landing Page', 'New', 53, 'Dummy lead #43 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
+(55, 90, 'Dummy Lead 44', 'dummy.lead44@example.com', '9000000044', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #44 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:39:30.205', 48, NULL),
+(56, 90, 'Dummy Lead 45', 'dummy.lead45@example.com', '9000000045', 'Male', 'Landing Page', 'New', NULL, 'Dummy lead #45 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:39:30.205', 48, NULL),
+(57, 90, 'Dummy Lead 46', 'dummy.lead46@example.com', '9000000046', 'Female', 'Landing Page', 'New', NULL, 'Dummy lead #46 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:39:30.205', 48, NULL),
+(58, 90, 'Dummy Lead 47', 'dummy.lead47@example.com', '9000000047', 'Male', 'Landing Page', 'New', 53, 'Dummy lead #47 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-26 11:12:36.000', 48, NULL),
+(59, 90, 'Dummy Lead 48', 'dummy.lead48@example.com', '9000000048', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #48 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 16:13:28.000', 48, NULL),
+(60, 90, 'Dummy Lead 49', 'dummy.lead49@example.com', '9000000049', 'Male', 'Landing Page', 'New', 53, 'Dummy lead #49 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-20 11:27:29.000', 48, NULL),
+(61, 90, 'Dummy Lead 50', 'dummy.lead50@example.com', '9000000050', 'Female', 'Landing Page', 'New', 51, 'Dummy lead #50 generated for bulk allocation testing.', '2026-06-08 18:39:30.205', '2026-06-08 18:40:22.000', 48, NULL),
 (62, 216, 'sarah', 'sarah123@gmail.com', '101010101010', 'Female', 'Phone', 'Converted', NULL, NULL, '2026-06-13 15:26:27.000', '2026-06-13 15:39:22.000', 50, '2026-06-02 00:00:00.000');
 
 -- --------------------------------------------------------
@@ -650,23 +650,20 @@ CREATE TABLE `member` (
   `planId` int(11) DEFAULT NULL,
   `discount` decimal(10,2) DEFAULT 0.00,
   `goal` varchar(191) DEFAULT NULL,
-  `profileImage` varchar(255) DEFAULT NULL,
-  `trainerId` int(11) DEFAULT NULL
+  `profileImage` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`id`, `userId`, `adminId`, `fullName`, `email`, `phone`, `gender`, `address`, `joinDate`, `branchId`, `membershipFrom`, `membershipTo`, `paymentMode`, `interestedIn`, `amountPaid`, `dateOfBirth`, `password`, `status`, `planId`, `discount`, `goal`, `profileImage`, `trainerId`) VALUES
-(148, 220, 216, 'sarah', 'sarah123@gmail.com', '101010101010', 'Female', NULL, '2026-06-13 15:39:22.639', NULL, '2026-06-13 05:30:00.000', '2026-07-14 05:30:00.000', 'Cash', 'Personal Training', 0, '2003-02-14 05:30:00.000', '$2b$10$wIknGYilm60SUH302rFVfuK7.RIFP.kfoHc6JxcThONy/vvr1WvUy', 'Active', 43, 0.00, NULL, NULL, NULL),
-(152, 224, 90, 'demo boy', 'demoboy@gmail.com', '7894561234', 'Male', 'demo street, demo city ', '2026-06-15 14:21:59.007', NULL, '2026-06-15 05:30:00.000', '2026-08-14 05:30:00.000', 'Cash', 'Personal Training', 1000, '1998-12-28 05:30:00.000', '$2b$10$xMgLjnERgs3JU4toOTxGV.W9l0L1bUE39v5/Pi7fTJ24EqhNoRDYK', 'Active', 22, 0.00, 'Weight Loss', NULL, NULL),
-(153, 225, 90, 'Demo girl', 'demogirl@gmail.com', '457869123', 'Female', 'demo street', '2026-06-15 15:11:44.762', NULL, '2026-06-15 05:30:00.000', '2026-07-15 05:30:00.000', 'Cash', 'General Trainer', 1000, '1999-08-21 05:30:00.000', '$2b$10$oQ/0HcuOdFAY/.NkIooRee2HS.XGtlw7.6DI3xwi3AGeN1T6Gsdjq', 'Active', 39, 0.00, 'Weight Gain', NULL, NULL),
-(154, 227, 90, 'Demo Aayush', 'demoaayu@gmail.com', '1234567890', 'Male', 'demo street', '2026-06-17 13:28:37.726', NULL, '2026-06-17 05:30:00.000', '2026-07-17 05:30:00.000', 'Cash', 'General Trainer', 1000, '2002-01-01 05:30:00.000', '$2b$10$/qC8JqA2Yq6IxtKKEGJey.btosdudsAV5IQCuoRnb05v0nUyFXd.q', 'Active', 39, 0.00, 'Weight Gain', NULL, NULL),
-(155, 228, 90, 'Dummy Lead 1', 'dummy.lead1@example.com', '9000000001', 'Male', 'xyz', '2026-06-17 14:33:22.872', NULL, '2026-06-17 05:30:00.000', '2026-07-17 05:30:00.000', 'Cash', 'General Trainer', 0, '2000-08-07 05:30:00.000', '$2b$10$XOroeua9HURQPyWvfQx9ROfv/x.MSxuEGc4ySVMZh0IiNSpreELbG', 'Active', 39, 0.00, 'Weight Loss', NULL, NULL),
-(156, 163, 90, 'Mamber', 'member@gmail.com', '1234567890', 'Male', NULL, '2025-01-01 00:00:00.000', 48, NULL, NULL, NULL, NULL, NULL, '1990-01-01 00:00:00.000', NULL, 'Active', NULL, 0.00, NULL, NULL, NULL),
-(157, 230, 90, 'pia b', 'pia@gmail.com', '78945455421', 'Female', 'null', '2026-06-26 15:29:00.425', NULL, '2026-06-26 05:30:00.000', '2026-08-25 05:30:00.000', 'Cash', 'Personal Training', 1000, '1997-02-28 05:30:00.000', '$2b$10$XM0CxnvFkK3w5zRHZbiw6enP8NceBqljEJr1JLwP2h5whr4b7i.T.', 'Active', 22, 0.00, 'Weight Gain', NULL, 25),
-(158, 231, 90, 'riya ', 'riya@gmail.com', '7849615654', 'Female', 'null', '2026-06-26 16:06:29.393', NULL, '2026-06-26 05:30:00.000', '2026-08-25 05:30:00.000', 'Cash', 'Personal Training', 1000, '0000-00-00 00:00:00.000', '$2b$10$ZQdCgNH7I//MSIeXYyDz2OvdI.wChFkj0IHFksLeDkrdSNYpV2.Ne', 'Active', 22, 0.00, 'Weight Loss', NULL, 25);
+INSERT INTO `member` (`id`, `userId`, `adminId`, `fullName`, `email`, `phone`, `gender`, `address`, `joinDate`, `branchId`, `membershipFrom`, `membershipTo`, `paymentMode`, `interestedIn`, `amountPaid`, `dateOfBirth`, `password`, `status`, `planId`, `discount`, `goal`, `profileImage`) VALUES
+(148, 220, 216, 'sarah', 'sarah123@gmail.com', '101010101010', 'Female', NULL, '2026-06-13 15:39:22.639', NULL, '2026-06-13 05:30:00.000', '2026-07-14 05:30:00.000', 'Cash', 'Personal Training', 0, '2003-02-14 05:30:00.000', '$2b$10$wIknGYilm60SUH302rFVfuK7.RIFP.kfoHc6JxcThONy/vvr1WvUy', 'Active', 43, 0.00, NULL, NULL),
+(152, 224, 90, 'demo boy', 'demoboy@gmail.com', '7894561234', 'Male', 'demo street, demo city ', '2026-06-15 14:21:59.007', NULL, '2026-06-15 05:30:00.000', '2026-08-14 05:30:00.000', 'Cash', 'Personal Training', 1000, '1998-12-28 05:30:00.000', '$2b$10$xMgLjnERgs3JU4toOTxGV.W9l0L1bUE39v5/Pi7fTJ24EqhNoRDYK', 'Active', 22, 0.00, 'Weight Loss', NULL),
+(153, 225, 90, 'Demo girl', 'demogirl@gmail.com', '457869123', 'Female', 'demo street', '2026-06-15 15:11:44.762', NULL, '2026-06-15 05:30:00.000', '2026-07-15 05:30:00.000', 'Cash', 'General Trainer', 1000, '1999-08-21 05:30:00.000', '$2b$10$oQ/0HcuOdFAY/.NkIooRee2HS.XGtlw7.6DI3xwi3AGeN1T6Gsdjq', 'Active', 39, 0.00, 'Weight Gain', NULL),
+(154, 227, 90, 'Demo Aayush', 'demoaayu@gmail.com', '1234567890', 'Male', 'demo street', '2026-06-17 13:28:37.726', NULL, '2026-06-17 05:30:00.000', '2026-07-17 05:30:00.000', 'Cash', 'General Trainer', 1000, '2002-01-01 05:30:00.000', '$2b$10$/qC8JqA2Yq6IxtKKEGJey.btosdudsAV5IQCuoRnb05v0nUyFXd.q', 'Active', 39, 0.00, 'Weight Gain', NULL),
+(155, 228, 90, 'Dummy Lead 1', 'dummy.lead1@example.com', '9000000001', 'Male', 'xyz', '2026-06-17 14:33:22.872', NULL, '2026-06-17 05:30:00.000', '2026-07-17 05:30:00.000', 'Cash', 'General Trainer', 0, '2000-08-07 05:30:00.000', '$2b$10$XOroeua9HURQPyWvfQx9ROfv/x.MSxuEGc4ySVMZh0IiNSpreELbG', 'Active', 39, 0.00, 'Weight Loss', NULL),
+(156, 163, 90, 'Mamber', 'member@gmail.com', '1234567890', 'Male', NULL, '2025-01-01 00:00:00.000', 48, NULL, NULL, NULL, NULL, NULL, '1990-01-01 00:00:00.000', NULL, 'Active', NULL, 0.00, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -926,9 +923,7 @@ INSERT INTO `member_plan_assignment` (`id`, `memberId`, `planId`, `membershipFro
 (60, 152, 22, '2026-06-15 05:30:00.000', '2026-08-14 05:30:00.000', 'Cash', 1000, 'Active', 90, '2026-06-15 14:21:59.000', '2026-06-15 14:21:59.011', '2026-06-15 14:21:59.011'),
 (61, 153, 39, '2026-06-15 05:30:00.000', '2026-07-15 05:30:00.000', 'Cash', 1000, 'Active', 90, '2026-06-15 15:11:44.000', '2026-06-15 15:11:44.769', '2026-06-15 15:11:44.769'),
 (62, 154, 39, '2026-06-17 05:30:00.000', '2026-07-17 05:30:00.000', 'Cash', 1000, 'Active', 90, '2026-06-17 13:28:37.000', '2026-06-17 13:28:37.731', '2026-06-17 13:28:37.731'),
-(63, 155, 39, '2026-06-17 05:30:00.000', '2026-07-17 05:30:00.000', 'Cash', 5000, 'Active', 90, '2026-06-17 14:33:22.000', '2026-06-17 14:33:22.876', '2026-06-17 14:33:22.876'),
-(64, 157, 22, '2026-06-26 05:30:00.000', '2026-08-25 05:30:00.000', 'Cash', 1000, 'Active', 90, '2026-06-26 15:29:00.000', '2026-06-26 15:29:00.430', '2026-06-26 15:29:00.430'),
-(65, 158, 22, '2026-06-26 05:30:00.000', '2026-08-25 05:30:00.000', 'Cash', 1000, 'Active', 90, '2026-06-26 16:06:29.000', '2026-06-26 16:06:29.408', '2026-06-26 16:06:29.408');
+(63, 155, 39, '2026-06-17 05:30:00.000', '2026-07-17 05:30:00.000', 'Cash', 5000, 'Active', 90, '2026-06-17 14:33:22.000', '2026-06-17 14:33:22.876', '2026-06-17 14:33:22.876');
 
 -- --------------------------------------------------------
 
@@ -1016,19 +1011,7 @@ INSERT INTO `notificationlog` (`id`, `type`, `to`, `message`, `status`, `created
 (39, 'EMAIL', 'dummy.lead1@example.com', 'Hi Dummy Lead 1,\n\nWelcome to our gym! 🏋️‍♂️ Your membership is registered successfully.\n\nLogin credentials:\nEmail: dummy.lead1@example.com\nPassword: 123456\n\nRegards,\nGym Management', 'FAILED', '2026-06-17 14:33:22.976', 155),
 (40, 'WHATSAPP', '9000000001', 'Hi Dummy Lead 1,\n\nWelcome to our gym! 🏋️‍♂️ Your membership is registered successfully.\n\nLogin credentials:\nEmail: dummy.lead1@example.com\nPassword: 123456\n\nRegards,\nGym Management', 'SENT', '2026-06-17 14:33:22.979', 155),
 (41, 'IN-APP', '228', 'Hi Dummy Lead 1,\n\nWelcome to our gym! 🏋️‍♂️ Your membership is registered successfully.\n\nLogin credentials:\nEmail: dummy.lead1@example.com\nPassword: 123456\n\nRegards,\nGym Management', 'UNREAD', '2026-06-17 14:33:22.981', 155),
-(42, 'IN-APP', '90', 'New inventory request: 10x Yoga Mats (High Density) by generaltrainer (ID: 93)', 'UNREAD', '2026-06-22 14:42:37.000', NULL),
-(43, 'EMAIL', 'pia@gmail.com', 'Hi pia b,\n\nWelcome to our gym! 🏋️‍♂️ Your membership is registered successfully.\n\nLogin credentials:\nEmail: pia@gmail.com\nPassword: 123456\n\nRegards,\nGym Management', 'FAILED', '2026-06-26 15:29:00.550', 157),
-(44, 'EMAIL', 'pia@gmail.com', 'Hi pia b,\n\nThank you for your payment of Rs.1000 for the Pre plan(s).\n\nYour membership is now active. Enjoy your workout! 💪\n\nRegards,\nGym Management', 'FAILED', '2026-06-26 15:29:00.557', 157),
-(45, 'WHATSAPP', '78945455421', 'Hi pia b,\n\nWelcome to our gym! 🏋️‍♂️ Your membership is registered successfully.\n\nLogin credentials:\nEmail: pia@gmail.com\nPassword: 123456\n\nRegards,\nGym Management', 'SENT', '2026-06-26 15:29:00.600', 157),
-(46, 'WHATSAPP', '78945455421', 'Hi pia b,\n\nThank you for your payment of Rs.1000 for the Pre plan(s).\n\nYour membership is now active. Enjoy your workout! 💪\n\nRegards,\nGym Management', 'SENT', '2026-06-26 15:29:00.606', 157),
-(47, 'IN-APP', '230', 'Hi pia b,\n\nWelcome to our gym! 🏋️‍♂️ Your membership is registered successfully.\n\nLogin credentials:\nEmail: pia@gmail.com\nPassword: 123456\n\nRegards,\nGym Management', 'UNREAD', '2026-06-26 15:29:00.609', 157),
-(48, 'IN-APP', '230', 'Hi pia b,\n\nThank you for your payment of Rs.1000 for the Pre plan(s).\n\nYour membership is now active. Enjoy your workout! 💪\n\nRegards,\nGym Management', 'UNREAD', '2026-06-26 15:29:00.611', 157),
-(49, 'EMAIL', 'riya@gmail.com', 'Hi riya ,\n\nWelcome to our gym! 🏋️‍♂️ Your membership is registered successfully.\n\nLogin credentials:\nEmail: riya@gmail.com\nPassword: 123456\n\nRegards,\nGym Management', 'FAILED', '2026-06-26 16:06:29.597', 158),
-(50, 'EMAIL', 'riya@gmail.com', 'Hi riya ,\n\nThank you for your payment of Rs.1000 for the Pre plan(s).\n\nYour membership is now active. Enjoy your workout! 💪\n\nRegards,\nGym Management', 'FAILED', '2026-06-26 16:06:29.614', 158),
-(51, 'WHATSAPP', '7849615654', 'Hi riya ,\n\nWelcome to our gym! 🏋️‍♂️ Your membership is registered successfully.\n\nLogin credentials:\nEmail: riya@gmail.com\nPassword: 123456\n\nRegards,\nGym Management', 'SENT', '2026-06-26 16:06:29.625', 158),
-(52, 'WHATSAPP', '7849615654', 'Hi riya ,\n\nThank you for your payment of Rs.1000 for the Pre plan(s).\n\nYour membership is now active. Enjoy your workout! 💪\n\nRegards,\nGym Management', 'SENT', '2026-06-26 16:06:29.639', 158),
-(53, 'IN-APP', '231', 'Hi riya ,\n\nWelcome to our gym! 🏋️‍♂️ Your membership is registered successfully.\n\nLogin credentials:\nEmail: riya@gmail.com\nPassword: 123456\n\nRegards,\nGym Management', 'UNREAD', '2026-06-26 16:06:29.639', 158),
-(54, 'IN-APP', '231', 'Hi riya ,\n\nThank you for your payment of Rs.1000 for the Pre plan(s).\n\nYour membership is now active. Enjoy your workout! 💪\n\nRegards,\nGym Management', 'UNREAD', '2026-06-26 16:06:29.641', 158);
+(42, 'IN-APP', '90', 'New inventory request: 10x Yoga Mats (High Density) by generaltrainer (ID: 93)', 'UNREAD', '2026-06-22 14:42:37.000', NULL);
 
 -- --------------------------------------------------------
 
@@ -1350,8 +1333,7 @@ INSERT INTO `staff` (`id`, `userId`, `adminId`, `branchId`, `gender`, `dateOfBir
 (52, 219, 216, 50, 'Male', '2000-02-01 05:30:00.000', '2026-06-13 05:30:00.000', '2026-08-13 05:30:00.000', 'https://res.cloudinary.com/dw48hcxi5/image/upload/v1781345250/staff/profile/qm4fsxd0zmh0tyc0jgo1.jpg', 'Active'),
 (53, 226, 90, 48, 'Female', '1998-06-16 05:30:00.000', '2026-05-01 05:30:00.000', NULL, 'https://res.cloudinary.com/dw48hcxi5/image/upload/v1781608364/staff/profile/ubhc9ahy3l3vqm3r6hmz.jpg', 'Active'),
 (54, 93, 90, 48, 'Male', '1990-01-01 00:00:00.000', '2025-01-01 00:00:00.000', NULL, NULL, 'Active'),
-(55, 93, 90, 48, 'Male', '1990-01-01 00:00:00.000', '2025-01-01 00:00:00.000', NULL, NULL, 'Active'),
-(56, 229, 90, NULL, '', '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000', NULL, NULL, 'Active');
+(55, 93, 90, 48, 'Male', '1990-01-01 00:00:00.000', '2025-01-01 00:00:00.000', NULL, NULL, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1546,7 +1528,7 @@ INSERT INTO `user` (`id`, `adminId`, `fullName`, `email`, `password`, `phone`, `
 (82, 68, 'John Doe', 'john.doe@example.com', '123', '1234567890', 4, 33, '2025-12-11 23:23:13.000', NULL, NULL, NULL, NULL, NULL, NULL, 'Active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
 (87, 68, 'Trainer Name', 'trainer@email.com', 'hashed_password_here', '9999999999', 3, 33, '2025-12-12 02:42:45.028', 'Address here', 'Trainer description', '60 mins', 'Gym Name', 'Plan Name', '1500', 'ACTIVE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
 (89, 90, 'John Smith', 'john@gmail.com', '$2b$10$crhZxB76ZuAWo2BDk1i3AednUk5HK2zm4ApRzkyOvnsn90JPMUxPq', '0770090987', 2, 33, '2025-12-12 23:54:44.133', '123 High Street', 'Life Time', 'Yearly', 'GYM Fitness ', 'Pro', '11999', 'active', NULL, NULL, NULL, NULL, NULL, NULL, 'https://res.cloudinary.com/dw48hcxi5/image/upload/v1765963221/users/profile/pytkcnfpl28ilkk9rpxy.png', '976856345', 10.00, 'indore', '2026-06-13 00:00:00.000', NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
-(90, 90, 'John Admin', 'admin@gmail.com', '$2b$10$crhZxB76ZuAWo2BDk1i3AednUk5HK2zm4ApRzkyOvnsn90JPMUxPq', '9876543210', 2, 48, '2025-12-13 00:01:36.965', '101 Shanti Nagar, Indore, Madhya Pradesh, 452001', 'Life Time', 'Yearly', 'Admin Gym', 'Pro', '11999', 'active', '2005-02-28', 'Male', NULL, NULL, NULL, NULL, 'https://res.cloudinary.com/dw48hcxi5/image/upload/v1765970252/users/profile/gbtbcuht06njylbc71q8.jpg', '8963546345', 10.00, 'indore', '2026-06-15 00:00:00.000', NULL, 'Basic', NULL, NULL, 12996, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
+(90, 90, 'John Admin', 'admin@gmail.com', '$2b$10$crhZxB76ZuAWo2BDk1i3AednUk5HK2zm4ApRzkyOvnsn90JPMUxPq', '9876543210', 2, 48, '2025-12-13 00:01:36.965', '101 Shanti Nagar, Indore, Madhya Pradesh, 452001', 'Life Time', 'Yearly', 'Admin Gym', 'Pro', '11999', 'active', '2005-02-28', 'Male', NULL, NULL, NULL, NULL, 'https://res.cloudinary.com/dw48hcxi5/image/upload/v1765970252/users/profile/gbtbcuht06njylbc71q8.jpg', '8963546345', 10.00, 'indore', '2026-06-15 00:00:00.000', NULL, 'Basic', NULL, NULL, 13000, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
 (91, 90, 'John Smith', 'smith1@gmail.com', '$2b$10$zO6HvteXi8KfmXtay9soce6aB0ILw3Jwpe.JznL/SthDX9bz1vHRy', '0770097890', 4, NULL, '2025-12-13 02:02:45.418', '123 High Street', NULL, NULL, NULL, NULL, NULL, 'Active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
 (93, 90, 'raghu Sharma', 'generaltrainer1@gym.com', '$2b$10$Fg6U/kNI6LkwhRzRmAvF7O7GUJqCO2mVRbq.CXOISSoQ7h0rPtKcy', '9988756655', 6, 48, '2025-12-13 03:13:46.354', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2006-06-02', NULL, NULL, NULL, NULL, NULL, 'https://res.cloudinary.com/dw48hcxi5/image/upload/v1765970802/users/profile/x6ie9nhdrlhoreaflybl.jpg', NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
 (102, 90, 'Personal', 'personal@gmail.com', '$2b$10$crhZxB76ZuAWo2BDk1i3AednUk5HK2zm4ApRzkyOvnsn90JPMUxPq', '0770097890', 5, 48, '2025-12-15 00:36:25.338', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://res.cloudinary.com/dw48hcxi5/image/upload/v1765965240/staff/profile/c7c68vpqtupwigaamwkg.jpg', NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
@@ -1593,9 +1575,7 @@ INSERT INTO `user` (`id`, `adminId`, `fullName`, `email`, `password`, `phone`, `
 (226, 90, 'aarti demo ', 'housekeeping1@gmail.com', '$2b$10$bx6O2SII1NeThTrDjACaN.esl03kAjc4ut.vwCTWLeggOpn5hmB/K', '745859612345', 8, 48, '2026-06-16 16:42:45.573', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://res.cloudinary.com/dw48hcxi5/image/upload/v1781608364/staff/profile/ubhc9ahy3l3vqm3r6hmz.jpg', NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
 (227, 90, 'Demo Aayush', 'demoaayu@gmail.com', '$2b$10$/qC8JqA2Yq6IxtKKEGJey.btosdudsAV5IQCuoRnb05v0nUyFXd.q', '1234567890', 4, NULL, '2026-06-17 13:28:37.723', 'demo street', NULL, NULL, NULL, NULL, NULL, 'Active', '2002-01-01', NULL, NULL, NULL, NULL, NULL, 'https://res.cloudinary.com/dw48hcxi5/image/upload/v1781683117/users/profile/f5kzs3ldapiae0kogzzl.jpg', NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
 (228, 90, 'Dummy Lead 1', 'dummy.lead1@example.com', '$2b$10$XOroeua9HURQPyWvfQx9ROfv/x.MSxuEGc4ySVMZh0IiNSpreELbG', '9000000001', 4, NULL, '2026-06-17 14:33:22.870', 'xyz', NULL, NULL, NULL, NULL, NULL, 'Active', '2000-08-07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
-(229, 90, 'Sales Agent', 'salesagent@gmail.com', '$2b$10$4qA1AkvgZkxtHUYLQJIjWencWdrdBwbDv0cYHrD2so1DAyJMICU.O', NULL, 10, 48, '2026-06-19 14:38:31.187', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
-(230, 90, 'pia b', 'pia@gmail.com', '$2b$10$XM0CxnvFkK3w5zRHZbiw6enP8NceBqljEJr1JLwP2h5whr4b7i.T.', '78945455421', 4, NULL, '2026-06-26 15:29:00.421', 'null', NULL, NULL, NULL, NULL, NULL, 'Active', '1998-02-08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL),
-(231, 90, 'riya ', 'riya@gmail.com', '$2b$10$ZQdCgNH7I//MSIeXYyDz2OvdI.wChFkj0IHFksLeDkrdSNYpV2.Ne', '7849615654', 4, NULL, '2026-06-26 16:06:29.388', 'null', NULL, NULL, NULL, NULL, NULL, 'Active', '1995-06-28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL);
+(229, 90, 'Sales Agent', 'salesagent@gmail.com', '$2b$10$4qA1AkvgZkxtHUYLQJIjWencWdrdBwbDv0cYHrD2so1DAyJMICU.O', NULL, 10, 48, '2026-06-19 14:38:31.187', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Basic', NULL, NULL, 0, 0, NULL, NULL, 'Basic', 'None', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1627,11 +1607,7 @@ INSERT INTO `whatsapp_credit_transactions` (`id`, `adminId`, `creditsPurchased`,
 (2, 0, 0, 1000, '', NULL, '2026-06-22 16:24:37', 'PURCHASE', 'Purchased Bronze Package via Razorpay (pay_mock_1782125677430)', 90, 500, 0),
 (3, 0, 0, 1000, '', NULL, '2026-06-22 16:24:40', 'PURCHASE', 'Purchased Bronze Package via Razorpay (pay_mock_1782125680441)', 90, 500, 0),
 (4, 0, 0, 1000, '', NULL, '2026-06-22 16:26:44', 'PURCHASE', 'Purchased Bronze Package via Razorpay (pay_mock_1782125804832)', 90, 500, 0),
-(5, 0, 0, 4500, '', NULL, '2026-06-22 16:27:14', 'PURCHASE', 'Purchased Silver Package via Razorpay (pay_mock_1782125834600)', 90, 5000, 0),
-(6, 0, 0, 0, '', NULL, '2026-06-26 15:29:00', 'USAGE', 'Sent WhatsApp to 78945455421', 90, 0, 1),
-(7, 0, 0, 0, '', NULL, '2026-06-26 15:29:00', 'USAGE', 'Sent WhatsApp to 78945455421', 90, 0, 1),
-(8, 0, 0, 0, '', NULL, '2026-06-26 16:06:29', 'USAGE', 'Sent WhatsApp to 7849615654', 90, 0, 1),
-(9, 0, 0, 0, '', NULL, '2026-06-26 16:06:29', 'USAGE', 'Sent WhatsApp to 7849615654', 90, 0, 1);
+(5, 0, 0, 4500, '', NULL, '2026-06-22 16:27:14', 'PURCHASE', 'Purchased Silver Package via Razorpay (pay_mock_1782125834600)', 90, 5000, 0);
 
 -- --------------------------------------------------------
 
@@ -2221,7 +2197,7 @@ ALTER TABLE `marketing_campaigns`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `memberattendance`
@@ -2263,7 +2239,7 @@ ALTER TABLE `member_health_log`
 -- AUTO_INCREMENT for table `member_plan_assignment`
 --
 ALTER TABLE `member_plan_assignment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `message_templates`
@@ -2275,7 +2251,7 @@ ALTER TABLE `message_templates`
 -- AUTO_INCREMENT for table `notificationlog`
 --
 ALTER TABLE `notificationlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -2347,7 +2323,7 @@ ALTER TABLE `shifts`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `staffattendance`
@@ -2383,13 +2359,13 @@ ALTER TABLE `used_qr_nonces`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
 
 --
 -- AUTO_INCREMENT for table `whatsapp_credit_transactions`
 --
 ALTER TABLE `whatsapp_credit_transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `workoutexercise`
