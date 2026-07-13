@@ -30,8 +30,8 @@ export const generateInvoicePdf = async (req, res, next) => {
     // Pipe PDF to response
     doc.pipe(res);
 
-    // Company details - Priority: settings gymName > admin profile gymName > adminName
-    const companyName = payment.settingsGymName || payment.adminGymName || payment.adminName || payment.branchName || "Gym Name";
+    // Company details - Priority: admin profile gymName > settings gymName > adminName
+    const companyName = payment.adminGymName || payment.settingsGymName || payment.adminName || payment.branchName || "Gym Name";
     // Priority: admin profile gymAddress > branchAddress
     const companyAddress = payment.adminGymAddress || payment.branchAddress || "Gym Address";
     const companyGST = payment.adminGstNumber || "";
@@ -39,10 +39,11 @@ export const generateInvoicePdf = async (req, res, next) => {
     const companyEmail = payment.adminEmail || "";
 
     // Member details
-    const memberName = payment.memberName || "";
-    const memberPhone = payment.memberPhone || "";
-    const memberEmail = payment.memberEmail || "";
-    const memberAddress = payment.memberAddress || "";
+    const cleanStr = (s) => (s && s !== "null" && s !== "undefined" ? String(s) : "");
+    const memberName = cleanStr(payment.memberName) || "Valued Member";
+    const memberPhone = cleanStr(payment.memberPhone);
+    const memberEmail = cleanStr(payment.memberEmail);
+    const memberAddress = cleanStr(payment.memberAddress);
     
     // Extract state from address for Place of Supply
     const addressParts = companyAddress.split(',');
@@ -154,11 +155,14 @@ export const generateInvoicePdf = async (req, res, next) => {
     doc
       .fontSize(11)
       .font('Helvetica')
-      .text(memberName, 50, doc.y)
-      .text(memberAddress, 50, doc.y + 12, { width: 500 })
-      .text(`Mobile ${memberPhone}`, 50, doc.y + 28);
-    
-    doc.y += 45;
+      .text(memberName, 50, doc.y);
+    if (memberAddress) {
+      doc.text(memberAddress, 50, doc.y + 14, { width: 500 });
+    }
+    if (memberPhone) {
+      doc.text(`Mobile: ${memberPhone}`, 50, doc.y + 14);
+    }
+    doc.y += 20;
     doc
       .fontSize(11)
       .font('Helvetica-Bold')
@@ -229,7 +233,14 @@ export const generateInvoicePdf = async (req, res, next) => {
       .text("1", 58, rowY + 10)
       .text(payment.planName || "Membership Plan", 100, rowY + 6, { width: 230 })
       .fontSize(8)
-      .text("Gym annual subscription", 100, rowY + 18, { width: 230 })
+      .text(
+        payment.planDuration
+          ? `${payment.planDuration} Months (${payment.planValidity || 0} Days Validity)`
+          : `${payment.planValidity || 30} Days Plan`,
+        100,
+        rowY + 18,
+        { width: 230 }
+      )
       .fontSize(10)
       .text("1 PCS", 350, rowY + 10, { align: "center" })
       .text(`${Math.floor(payment.subtotal).toLocaleString('en-IN')}`, 400, rowY + 10, { align: "right" })

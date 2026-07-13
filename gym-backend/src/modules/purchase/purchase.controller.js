@@ -70,7 +70,8 @@ export const createPurchase = async (req, res) => {
         );
 
         // Dispatch Upgrade Invoice Notification
-        const invoiceMsg = `Hi ${data.companyName || "Gym Owner"}, \n\nThank you for upgrading to the ${data.selectedPlan} plan. We have received your payment of Rs.${data.amount || 0}.\n\nYour new subscription is active.\n\nTransaction ID: ${purchase.transactionId || 'N/A'}\n\nRegards,\nSpeed Fitness Team`;
+        const invoiceUrl = `http://localhost:5000/api/v1/purchases/invoice/pdf/${purchase.id}`;
+        const invoiceMsg = `Hi ${data.companyName || "Gym Owner"}, \n\nThank you for upgrading to the ${data.selectedPlan} plan. We have received your payment of Rs.${data.amount || 0}.\n\nYour new subscription is active.\n\nDownload Tax Invoice PDF: ${invoiceUrl}\nTransaction ID: ${purchase.transactionId || 'N/A'}\n\nRegards,\nSpeed Fitness Team`;
         await dispatchNotification({
           category: "invoice",
           toEmail: data.email,
@@ -153,7 +154,8 @@ Please log in and begin managing your gym!`;
         });
 
         // Dispatch Onboarding Invoice Notification
-        const invoiceMsg = `Hi ${data.companyName || "Gym Owner"}, \n\nThank you for purchasing the ${data.selectedPlan} plan. We have received your payment of Rs.${data.amount || 0}.\n\nYour Gym Owner account is active.\n\nTransaction ID: ${purchase.transactionId || 'N/A'}\n\nRegards,\nSpeed Fitness Team`;
+        const invoiceUrl = `http://localhost:5000/api/v1/purchases/invoice/pdf/${purchase.id}`;
+        const invoiceMsg = `Hi ${data.companyName || "Gym Owner"}, \n\nThank you for purchasing the ${data.selectedPlan} plan. We have received your payment of Rs.${data.amount || 0}.\n\nYour Gym Owner account is active.\n\nDownload Tax Invoice PDF: ${invoiceUrl}\nTransaction ID: ${purchase.transactionId || 'N/A'}\n\nRegards,\nSpeed Fitness Team`;
         await dispatchNotification({
           category: "invoice",
           toEmail: data.email,
@@ -340,9 +342,11 @@ export const updatePurchaseStatus = async (req, res, next) => {
           );
 
           // Notify upgrade approval
+          const invoiceUrl = `http://localhost:5000/api/v1/purchases/invoice/pdf/${id}`;
           const messageBody = `🎉 Subscription Approved!
 Your request to renew/upgrade your gym plan to "${data.selectedPlan}" has been approved.
 
+Download Tax Invoice PDF: ${invoiceUrl}
 New Expiry Date: ${newExpiryDate.toLocaleDateString('en-GB')}
 Thank you for staying with us!`;
 

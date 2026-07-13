@@ -35,7 +35,8 @@ const AdminSettings = () => {
     invoice: { EMAIL: false, WHATSAPP: false, APP_PUSH: false },
     templates: { EMAIL: false, WHATSAPP: false, APP_PUSH: false },
     free_trial_alert: { EMAIL: false, WHATSAPP: false, APP_PUSH: false },
-    saas_renewal: { EMAIL: false, WHATSAPP: false, APP_PUSH: false }
+    saas_renewal: { EMAIL: false, WHATSAPP: false, APP_PUSH: false },
+    saas_payment_invoice: { EMAIL: true, WHATSAPP: true, APP_PUSH: true }
   });
   const [savingChannels, setSavingChannels] = useState(false);
   const [showChannelMessage, setShowChannelMessage] = useState(false);
@@ -74,10 +75,11 @@ const AdminSettings = () => {
             invoice: { EMAIL: false, WHATSAPP: false, APP_PUSH: false },
             templates: { EMAIL: false, WHATSAPP: false, APP_PUSH: false },
             free_trial_alert: { EMAIL: false, WHATSAPP: false, APP_PUSH: false },
-            saas_renewal: { EMAIL: false, WHATSAPP: false, APP_PUSH: false }
+            saas_renewal: { EMAIL: false, WHATSAPP: false, APP_PUSH: false },
+            saas_payment_invoice: { EMAIL: true, WHATSAPP: true, APP_PUSH: true }
           };
 
-          const keys = ['welcome_note', 'invoice', 'templates', 'free_trial_alert', 'saas_renewal'];
+          const keys = ['welcome_note', 'invoice', 'templates', 'free_trial_alert', 'saas_renewal', 'saas_payment_invoice'];
           keys.forEach(key => {
             const arr = settings[`${key}_channel`] || [];
             arr.forEach(ch => {
@@ -115,7 +117,7 @@ const AdminSettings = () => {
     setSavingChannels(true);
     try {
       const payload = {};
-      const keys = ['welcome_note', 'invoice', 'templates', 'free_trial_alert', 'saas_renewal'];
+      const keys = ['welcome_note', 'invoice', 'templates', 'free_trial_alert', 'saas_renewal', 'saas_payment_invoice'];
       keys.forEach(key => {
         const active = [];
         Object.entries(notifChannels[key]).forEach(([ch, isTrue]) => {
@@ -616,6 +618,47 @@ const handleSubmit = async (e) => {
                               type="checkbox"
                               checked={notifChannels.saas_renewal.APP_PUSH}
                               onChange={() => handleChannelCheckboxChange('saas_renewal', 'APP_PUSH')}
+                              style={{ cursor: 'pointer' }}
+                            />
+                          </div>
+                        </td>
+                      </tr>
+
+                      {/* Row 6: SaaS Payment Invoice / Receipt */}
+                      <tr>
+                        <td className="fw-bold">
+                          SaaS Payment Invoice / Receipt
+                          <div className="text-muted fw-normal small">Sent automatically to Gym Owners with PDF Tax Invoice link when subscription payment is received.</div>
+                        </td>
+                        <td className="text-center">
+                          <div className="form-check form-switch d-inline-block">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              checked={notifChannels.saas_payment_invoice?.EMAIL}
+                              onChange={() => handleChannelCheckboxChange('saas_payment_invoice', 'EMAIL')}
+                              style={{ cursor: 'pointer' }}
+                            />
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <div className="form-check form-switch d-inline-block">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              checked={notifChannels.saas_payment_invoice?.WHATSAPP}
+                              onChange={() => handleChannelCheckboxChange('saas_payment_invoice', 'WHATSAPP')}
+                              style={{ cursor: 'pointer' }}
+                            />
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <div className="form-check form-switch d-inline-block">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              checked={notifChannels.saas_payment_invoice?.APP_PUSH}
+                              onChange={() => handleChannelCheckboxChange('saas_payment_invoice', 'APP_PUSH')}
                               style={{ cursor: 'pointer' }}
                             />
                           </div>

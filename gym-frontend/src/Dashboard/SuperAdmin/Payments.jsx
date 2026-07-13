@@ -17,6 +17,7 @@ import * as XLSX from "xlsx";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import axiosInstance from "../../Api/axiosInstance";
+import BaseUrl from "../../Api/BaseUrl";
 
 const tabs = ["All Payments", "Success", "Pending", "Failed"];
 
@@ -32,6 +33,7 @@ const Payments = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [transactionsList, setTransactionsList] = useState([]);
+  const [selectedIds, setSelectedIds] = useState([]);
   const [paymentSettings, setPaymentSettings] = useState({
     currency: "INR",
     autoRefund: true,
@@ -65,6 +67,11 @@ const Payments = () => {
               dbId: item.id,
               date: new Date(item.purchaseDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
               customer: item.companyName || item.adminName || "Unknown Admin",
+              email: item.email || "N/A",
+              phone: item.phone || "N/A",
+              plan: item.selectedPlan || "SaaS Gym Management Plan",
+              billingDuration: item.billingDuration || "Monthly",
+              gstNumber: item.gstNumber || "N/A",
               method: { name: methodText },
               amount: `₹${parseFloat(item.amount || 0).toLocaleString('en-IN')}`,
               rawAmount: parseFloat(item.amount || 0),
@@ -254,9 +261,48 @@ const Payments = () => {
     </div>
   );
 
+  const handleDownloadSinglePDF = (txn) => {
+    const url = `${BaseUrl}purchases/invoice/pdf/${txn.dbId}`;
+    window.open(url, "_blank");
+  };
+
+  const handleDownloadSelectedPDFs = () => {
+    if (selectedIds.length === 0) {
+      alert("Please select at least one transaction to download invoices.");
+      return;
+    }
+    const selectedTxns = transactionsList.filter(t => selectedIds.includes(t.id));
+    selectedTxns.forEach((txn, index) => {
+      setTimeout(() => {
+        handleDownloadSinglePDF(txn);
+      }, index * 400);
+    });
+  };
+
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      setSelectedIds(filteredTransactions.map(t => t.id));
+    } else {
+      setSelectedIds([]);
+    }
+  };
+
+  const handleSelectOne = (id) => {
+    setSelectedIds(prev =>
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    );
+  };
+
   // Action buttons component for consistency - Second Screenshot Style
   const ActionButtons2 = ({ txn }) => (
     <div className="d-flex gap-2">
+      <button 
+        className="action-btn pdf-btn" 
+        onClick={() => handleDownloadSinglePDF(txn)}
+        title="Download A4 Tax Invoice PDF"
+      >
+        <FaFilePdf size={14} />
+      </button>
       <button 
         className="action-btn eye-btn" 
         onClick={() => handleViewDetails(txn)}
@@ -333,7 +379,12 @@ const Payments = () => {
               </li>
               <li>
                 <button className="dropdown-item d-flex align-items-center py-2" onClick={handlePDFDownload}>
-                  <span style={{ color: "#dc3545", marginRight: "10px", fontWeight: 600 }}>PDF</span> Export to PDF
+                  <span style={{ color: "#dc3545", marginRight: "10px", fontWeight: 600 }}>PDF</span> Export Table Summary
+                </button>
+              </li>
+              <li>
+                <button className="dropdown-item d-flex align-items-center py-2" onClick={handleDownloadSelectedPDFs}>
+                  <span style={{ color: "#d90429", marginRight: "10px", fontWeight: 600 }}>A4</span> Download Selected Invoices ({selectedIds.length})
                 </button>
               </li>
             </ul>
@@ -411,28 +462,65 @@ const Payments = () => {
 
       {/* DESKTOP TABLE VIEW - SECOND SCREENSHOT STYLE (WITH FUNCTIONALITY) */}
       {["All Payments", "Success", "Pending", "Failed"].includes(activeTab) && (
-        <div className="table-responsive bg-white rounded shadow-sm p-3 d-none d-md-block" id="transaction-table">
-          <table className="table table-hover align-middle">
-            <thead className="table-light">
-              <tr>
-                <th><input type="checkbox" /></th>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Customer</th>
-                <th>Method</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
+        <>
+          {selectedIds.length > 0 && (
+            <div className="alert alert-info d-flex align-items-center justify-content-between mb-3 shadow-sm py-2 px-3" style={{ borderRadius: "10px" }}>
+              <div>
+                <strong>{selectedIds.length}</strong> transaction(s) selected
+              </div>
+              <div className="d-flex gap-2">
+                <button
+                  className="btn btn-sm btn-danger d-flex align-items-center"
+                  onClick={handleDownloadSelectedPDFs}
+                >
+                  <FaFilePdf className="me-2" />
+                  Download Selected A4 Invoices ({selectedIds.length})
+                </button>
+                <button
+                  className="btn btn-sm btn-outline-secondary"
+                  onClick={() => setSelectedIds([])}
+                >
+                  Clear Selection
+                </button>
+              </div>
+            </div>
+          )}
+          <div className="table-responsive bg-white rounded shadow-sm p-3 d-none d-md-block" id="transaction-table">
+            <table className="table table-hover align-middle">
+              <thead className="table-light">
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      checked={filteredTransactions.length > 0 && selectedIds.length === filteredTransactions.length}
+                      onChange={handleSelectAll}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </th>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Customer</th>
+                  <th>Method</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {filteredTransactions.map((txn, idx) => (
-                <tr key={idx}>
-                  <td><input type="checkbox" /></td>
-                  <td>{txn.id}</td>
-                  <td>{txn.date}</td>
-                  <td><strong>{txn.customer}</strong></td>
+              <tbody>
+                {filteredTransactions.map((txn, idx) => (
+                  <tr key={idx}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.includes(txn.id)}
+                        onChange={() => handleSelectOne(txn.id)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </td>
+                    <td>{txn.id}</td>
+                    <td>{txn.date}</td>
+                    <td><strong>{txn.customer}</strong></td>
                   <td>{txn.method.name}</td>
                   <td>{txn.amount}</td>
 
@@ -456,6 +544,7 @@ const Payments = () => {
             </tbody>
           </table>
         </div>
+        </>
       )}
 
       {/* MOBILE CARD VIEW */}
@@ -587,41 +676,84 @@ const Payments = () => {
         </div>
       )}
 
-      {/* VIEW DETAILS MODAL - COMPACT SIZE */}
+      {/* VIEW DETAILS & INVOICE MODAL */}
       {showModal && selectedTransaction && (
         <div className="modal fade show" style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}>
-          <div className="modal-dialog modal-dialog-centered modal-compact">
+          <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content">
-              <div className="modal-header py-2">
-                <h5 className="modal-title">Transaction Details</h5>
+              <div className="modal-header py-3 bg-light">
+                <div>
+                  <h5 className="modal-title fw-bold text-dark mb-0">Transaction & Tax Invoice Details</h5>
+                  <small className="text-muted">A4 Systematic Invoice Breakdown</small>
+                </div>
                 <button className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
-              <div className="modal-body py-3">
+              <div className="modal-body py-4">
+                {/* SECTION 1: CUSTOMER & GYM INFO */}
+                <h6 className="fw-bold text-primary mb-2">Customer & Gym Information</h6>
                 <div className="card border-0 bg-light mb-3">
                   <div className="card-body p-3">
-                    <div className="row g-2">
-                      <div className="col-12 col-md-6">
-                        <label className="form-label text-muted small mb-1">Transaction ID</label>
-                        <p className="fw-bold mb-0">{selectedTransaction.id}</p>
-                      </div>
-                      <div className="col-12 col-md-6">
-                        <label className="form-label text-muted small mb-1">Date</label>
-                        <p className="fw-bold mb-0">{selectedTransaction.date}</p>
-                      </div>
-                      <div className="col-12 col-md-6">
-                        <label className="form-label text-muted small mb-1">Customer Name</label>
+                    <div className="row g-3">
+                      <div className="col-12 col-md-4">
+                        <label className="form-label text-muted small mb-0">Gym / Customer Name</label>
                         <p className="fw-bold mb-0">{selectedTransaction.customer}</p>
                       </div>
+                      <div className="col-12 col-md-4">
+                        <label className="form-label text-muted small mb-0">Email Address</label>
+                        <p className="fw-bold mb-0">{selectedTransaction.email}</p>
+                      </div>
+                      <div className="col-12 col-md-4">
+                        <label className="form-label text-muted small mb-0">Phone / Contact</label>
+                        <p className="fw-bold mb-0">{selectedTransaction.phone}</p>
+                      </div>
+                      <div className="col-12 col-md-4">
+                        <label className="form-label text-muted small mb-0">GSTIN</label>
+                        <p className="fw-bold mb-0">{selectedTransaction.gstNumber}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SECTION 2: SUBSCRIPTION & PLAN INFO */}
+                <h6 className="fw-bold text-primary mb-2">Subscription & Plan Details</h6>
+                <div className="card border-0 bg-light mb-3">
+                  <div className="card-body p-3">
+                    <div className="row g-3">
                       <div className="col-12 col-md-6">
-                        <label className="form-label text-muted small mb-1">Payment Method</label>
+                        <label className="form-label text-muted small mb-0">Selected Plan</label>
+                        <p className="fw-bold mb-0">{selectedTransaction.plan}</p>
+                      </div>
+                      <div className="col-12 col-md-6">
+                        <label className="form-label text-muted small mb-0">Billing Duration</label>
+                        <p className="fw-bold mb-0">{selectedTransaction.billingDuration}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SECTION 3: PAYMENT & TRANSACTION INFO */}
+                <h6 className="fw-bold text-primary mb-2">Payment Details</h6>
+                <div className="card border-0 bg-light mb-2">
+                  <div className="card-body p-3">
+                    <div className="row g-3">
+                      <div className="col-12 col-md-4">
+                        <label className="form-label text-muted small mb-0">Transaction ID</label>
+                        <p className="fw-bold mb-0">{selectedTransaction.id}</p>
+                      </div>
+                      <div className="col-12 col-md-4">
+                        <label className="form-label text-muted small mb-0">Date</label>
+                        <p className="fw-bold mb-0">{selectedTransaction.date}</p>
+                      </div>
+                      <div className="col-12 col-md-4">
+                        <label className="form-label text-muted small mb-0">Payment Method</label>
                         <p className="fw-bold mb-0">{selectedTransaction.method.name}</p>
                       </div>
-                      <div className="col-12 col-md-6">
-                        <label className="form-label text-muted small mb-1">Amount</label>
-                        <p className="fw-bold mb-0 text-success">{selectedTransaction.amount}</p>
+                      <div className="col-12 col-md-4">
+                        <label className="form-label text-muted small mb-0">Total Amount</label>
+                        <p className="fw-bold mb-0 text-success fs-5">{selectedTransaction.amount}</p>
                       </div>
-                      <div className="col-12 col-md-6">
-                        <label className="form-label text-muted small mb-1">Status</label>
+                      <div className="col-12 col-md-4">
+                        <label className="form-label text-muted small mb-0">Status</label>
                         <div>
                           {selectedTransaction.status === "Success" && <span className="badge bg-success">Success</span>}
                           {selectedTransaction.status === "Failed" && <span className="badge bg-danger">Failed</span>}
@@ -630,7 +762,7 @@ const Payments = () => {
                       </div>
                       {selectedTransaction.reason && (
                         <div className="col-12">
-                          <label className="form-label text-muted small mb-1">Reason</label>
+                          <label className="form-label text-muted small mb-0">Reason</label>
                           <p className="fw-bold mb-0 text-danger">{selectedTransaction.reason}</p>
                         </div>
                       )}
@@ -639,8 +771,15 @@ const Payments = () => {
                 </div>
               </div>
 
-              <div className="modal-footer py-2">
-                <button className="btn btn-secondary btn-sm" onClick={() => setShowModal(false)}>Close</button>
+              <div className="modal-footer py-3 d-flex justify-content-between align-items-center">
+                <button
+                  className="btn btn-danger d-flex align-items-center fw-bold"
+                  onClick={() => handleDownloadSinglePDF(selectedTransaction)}
+                >
+                  <FaFilePdf className="me-2" />
+                  Download A4 Tax Invoice (PDF)
+                </button>
+                <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
               </div>
             </div>
           </div>
@@ -843,6 +982,17 @@ const Payments = () => {
           border-color: #5ca9d9;
         }
         
+        .pdf-btn {
+          background: #fff0f0;
+          border-color: #ffb3b3;
+          color: #d90429;
+        }
+        
+        .pdf-btn:hover {
+          background: #ffe5e5;
+          border-color: #ff4d4d;
+        }
+
         .trash-btn {
           background: #ffe5e5;
           border-color: #ff4d4d;

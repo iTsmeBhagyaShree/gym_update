@@ -1,0 +1,8 @@
+.env
+**/.env
+node_modules/
+dist/
+~$*.docx
+~$*.docx
+Schedule a demo link.docx
+Schedule a demo link 2.docx
