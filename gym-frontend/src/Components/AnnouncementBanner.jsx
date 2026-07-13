@@ -17,17 +17,53 @@ const AnnouncementBanner = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const res = await axiosInstance.get("notif/admin/broadcast/history");
-      if (res.data?.success && res.data.history?.length > 0) {
-        // Filter out SuperAdmin broadcasts (those without adminId)
-        // Only show announcements created by this admin
-        const adminOnly = res.data.history.filter(a => a.adminId != null);
-        if (adminOnly.length > 0) {
-          const latest = adminOnly.slice(0, 5);
-          setAnnouncements(latest);
+      const user = JSON.parse(localStorage.getItem('user')) || {};
+      const role = (localStorage.getItem("userRole") || user.roleName || user.role || "").toLowerCase();
+      
+      let list = [];
+      if (role === 'member') {
+        const res = await axiosInstance.get("/notif/user-announcements?roleGroup=MEMBERS");
+        if (res.data?.success) {
+          list = res.data.announcements || [];
+        }
+      } else if (role === 'admin' || role === 'superadmin' || role === 'manager') {
+        const res = await axiosInstance.get("notif/admin/broadcast/history");
+        if (res.data?.success) {
+          list = res.data.history || [];
+        }
+      } else {
+        const res = await axiosInstance.get("/notif/user-announcements?roleGroup=STAFF");
+        if (res.data?.success) {
+          list = res.data.announcements || [];
+        }
+      }
+
+      if (list.length > 0) {
+        const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+        
+        let filtered = list;
+        if (role === 'admin') {
+          // Admin only sees announcements of their own account
+          filtered = list.filter(a => a.adminId === user.id || a.adminId === user.adminId);
+        }
+        
+        // Filter to only include announcements from the last 24 hours
+        const activeAnnouncements = filtered.filter(a => {
+          const createdTime = new Date(a.createdAt).getTime();
+          return createdTime >= oneDayAgo;
+        });
+
+        if (activeAnnouncements.length > 0) {
+          setAnnouncements(activeAnnouncements.slice(0, 5));
           setVisible(true);
           setDismissed(false);
+        } else {
+          setAnnouncements([]);
+          setVisible(false);
         }
+      } else {
+        setAnnouncements([]);
+        setVisible(false);
       }
     } catch (err) {
       // silently fail – banner is non-critical

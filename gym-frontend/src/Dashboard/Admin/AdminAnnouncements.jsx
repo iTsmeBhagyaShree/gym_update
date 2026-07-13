@@ -22,7 +22,8 @@ import {
   faTrophy,
   faHeartbeat,
   faCreditCard,
-  faChartLine
+  faChartLine,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 
 // ── Category Config ──────────────────────────────────────────────────────────
@@ -60,6 +61,19 @@ const GroupBroadcastTab = () => {
       console.error("Failed to load broadcast history:", err);
     } finally {
       setHistoryLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this announcement?")) return;
+    try {
+      const res = await axiosInstance.delete(`/notif/announcement/${id}`);
+      if (res.data?.success) {
+        fetchHistory();
+      }
+    } catch (err) {
+      console.error("Failed to delete announcement:", err);
+      alert(err.response?.data?.message || "Failed to delete announcement.");
     }
   };
 
@@ -223,6 +237,7 @@ const GroupBroadcastTab = () => {
                     <th className="fw-semibold text-secondary small">Subject</th>
                     <th className="fw-semibold text-secondary small">Audience</th>
                     <th className="fw-semibold text-secondary small">Channels</th>
+                    <th className="fw-semibold text-secondary small text-end">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -255,6 +270,16 @@ const GroupBroadcastTab = () => {
                             </span>
                           ))}
                         </div>
+                      </td>
+                      <td className="text-end">
+                        <button 
+                          className="btn btn-link text-danger p-1" 
+                          onClick={() => handleDelete(ann.id)} 
+                          title="Delete Broadcast"
+                          style={{ fontSize: "14px" }}
+                        >
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
                       </td>
                     </tr>
                   ))}

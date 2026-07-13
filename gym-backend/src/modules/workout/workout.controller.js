@@ -7,7 +7,7 @@ import {
 export const createWorkoutPlan = async (req, res, next) => {
   try {
     const workout = await createWorkoutPlanService(req.body);
-    res.json({ success: true, workout });
+    res.json({ success: true, workout, data: workout });
   } catch (err) {
     next(err);
   }

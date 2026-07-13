@@ -8,7 +8,8 @@ import {
   getAdminBroadcastHistoryService,
   getUserAnnouncementsService,
   sendPersonalNotificationService,
-  getPersonalNotifHistoryService
+  getPersonalNotifHistoryService,
+  deleteAnnouncementService
 } from "./notif.service.js";
 import { uploadToCloudinary } from "../../config/cloudinary.js";
 
@@ -194,3 +195,15 @@ export const getPersonalHistory = async (req, res, next) => {
   }
 };
 
+export const deleteAnnouncement = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const isSuperAdmin = req.user.roleId === 1;
+    const adminId = isSuperAdmin ? null : (req.user.roleId === 2 ? req.user.id : req.user.adminId);
+    
+    await deleteAnnouncementService(id, adminId);
+    res.json({ success: true, message: "Announcement deleted successfully" });
+  } catch (err) {
+    next(err);
+  }
+};

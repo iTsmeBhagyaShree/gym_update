@@ -10,7 +10,8 @@ import {
   faBell, 
   faUsers, 
   faUserTie, 
-  faInfoCircle 
+  faInfoCircle,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 
 const Announcements = () => {
@@ -42,6 +43,19 @@ const Announcements = () => {
       console.error("Failed to load broadcast history:", err);
     } finally {
       setHistoryLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this announcement?")) return;
+    try {
+      const res = await axiosInstance.delete(`/notif/announcement/${id}`);
+      if (res.data?.success) {
+        fetchHistory();
+      }
+    } catch (err) {
+      console.error("Failed to delete announcement:", err);
+      alert(err.response?.data?.message || "Failed to delete announcement.");
     }
   };
 
@@ -340,6 +354,7 @@ const Announcements = () => {
                       <th style={{ width: "110px", backgroundColor: "#f8fafc", color: "#4a5568", fontWeight: "600", borderBottom: "2px solid #e2e8f0" }}>Audience</th>
                       <th style={{ width: "160px", backgroundColor: "#f8fafc", color: "#4a5568", fontWeight: "600", borderBottom: "2px solid #e2e8f0" }}>Channels</th>
                       <th style={{ width: "110px", backgroundColor: "#f8fafc", color: "#4a5568", fontWeight: "600", borderBottom: "2px solid #e2e8f0" }}>Sender</th>
+                      <th style={{ width: "80px", backgroundColor: "#f8fafc", color: "#4a5568", fontWeight: "600", borderBottom: "2px solid #e2e8f0", textAlign: "right" }}>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -393,6 +408,16 @@ const Announcements = () => {
                         </td>
                         <td style={{ fontSize: "12px" }}>
                           {ann.senderName || "Superadmin"}
+                        </td>
+                        <td style={{ textAlign: "right" }}>
+                          <button 
+                            className="btn btn-link text-danger p-1" 
+                            onClick={() => handleDelete(ann.id)} 
+                            title="Delete Broadcast"
+                            style={{ fontSize: "14px" }}
+                          >
+                            <FontAwesomeIcon icon={faTrash} />
+                          </button>
                         </td>
                       </tr>
                     ))}

@@ -10,7 +10,8 @@ import {
   getAdminBroadcastHistory,
   getUserAnnouncements,
   sendPersonalNotification,
-  getPersonalHistory
+  getPersonalHistory,
+  deleteAnnouncement
 } from "./notif.controller.js";
 
 const router = Router();
@@ -74,6 +75,12 @@ router.get(
   "/personal/history",
   verifyToken(["Admin", "Superadmin", "Manager"]),
   getPersonalHistory
+);
+
+router.delete(
+  "/announcement/:id",
+  verifyToken(["Admin", "Superadmin", "Manager"]),
+  deleteAnnouncement
 );
 
 export default router;

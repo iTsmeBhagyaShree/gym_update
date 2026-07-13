@@ -319,4 +319,17 @@ export const getPersonalNotifHistoryService = async (adminId) => {
   );
   return rows;
 };
+export const deleteAnnouncementService = async (id, adminId) => {
+  if (adminId) {
+    const [existing] = await pool.query(
+      "SELECT id FROM announcement WHERE id = ? AND adminId = ?",
+      [id, adminId]
+    );
+    if (!existing.length) {
+      throw { status: 403, message: "Unauthorized to delete this announcement or announcement not found." };
+    }
+  }
 
+  await pool.query("DELETE FROM announcement WHERE id = ?", [id]);
+  return true;
+};
