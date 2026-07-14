@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../Api/axiosInstance";
 import { useNavigate } from "react-router-dom";
-import { FaEye, FaEdit, FaTrashAlt, FaUsers, FaUserCheck, FaPercent } from 'react-icons/fa';
+import { FaEye, FaEdit, FaTrashAlt, FaUsers, FaUserCheck, FaPercent, FaCalendarAlt } from 'react-icons/fa';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -25,6 +25,7 @@ const Leads = () => {
   const [crmStats, setCrmStats] = useState(null);
   const [crmLoading, setCrmLoading] = useState(false);
   const [statusFilter, setStatusFilter] = useState("all");
+  const [superAdminFilter, setSuperAdminFilter] = useState("all");
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState('add');
   const [selectedLeadId, setSelectedLeadId] = useState(null);
@@ -253,6 +254,13 @@ const Leads = () => {
     }
   };
 
+  const displayLeads = leads.filter(lead => {
+    if (superAdminFilter === "all") return true;
+    if (superAdminFilter === "Converted") return lead.status === "Converted";
+    if (superAdminFilter === "Schedule Demo") return lead.source === "Schedule Demo";
+    return true;
+  });
+
   const filteredLeads = leads.filter(lead => {
     if (statusFilter === "all") return lead.status !== "Converted";
     return lead.status?.toLowerCase() === statusFilter.toLowerCase();
@@ -381,7 +389,7 @@ const Leads = () => {
         <>
           {/* Stats Cards */}
           <div className="row g-3 mb-4">
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-sm-6 col-xl-3">
               <div 
                 className="card shadow-sm border-0 h-100" 
                 style={{ 
@@ -389,24 +397,24 @@ const Leads = () => {
                   background: "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)", 
                   color: "white",
                   cursor: "pointer",
-                  border: statusFilter === "all" ? "3px solid rgba(255, 255, 255, 0.9)" : "3px solid transparent",
-                  transform: statusFilter === "all" ? "scale(1.02)" : "scale(1)",
+                  border: superAdminFilter === "all" ? "3px solid rgba(255, 255, 255, 0.9)" : "3px solid transparent",
+                  transform: superAdminFilter === "all" ? "scale(1.02)" : "scale(1)",
                   transition: "all 0.2s"
                 }}
-                onClick={() => setStatusFilter("all")}
+                onClick={() => setStatusFilter("all") & setSuperAdminFilter("all")}
               >
                 <div className="card-body d-flex align-items-center justify-content-between p-4">
                   <div>
                     <div className="small opacity-80 fw-semibold">Total Leads</div>
-                    <div className="fs-2 fw-bold mt-2">{crmStats.summary.totalLeads}</div>
+                    <div className="fs-2 fw-bold mt-2">{leads.length}</div>
                   </div>
-                  <div className="bg-white bg-opacity-20 p-3 rounded-circle" style={{ width: "60px", height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <FaUsers size={28} />
+                  <div className="bg-white bg-opacity-20 p-3 rounded-circle" style={{ width: "55px", height: "55px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <FaUsers size={24} />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-sm-6 col-xl-3">
               <div 
                 className="card shadow-sm border-0 h-100" 
                 style={{ 
@@ -414,44 +422,69 @@ const Leads = () => {
                   background: "linear-gradient(135deg, #05CD99 0%, #11998e 100%)", 
                   color: "white",
                   cursor: "pointer",
-                  border: statusFilter === "Converted" ? "3px solid rgba(255, 255, 255, 0.9)" : "3px solid transparent",
-                  transform: statusFilter === "Converted" ? "scale(1.02)" : "scale(1)",
+                  border: superAdminFilter === "Converted" ? "3px solid rgba(255, 255, 255, 0.9)" : "3px solid transparent",
+                  transform: superAdminFilter === "Converted" ? "scale(1.02)" : "scale(1)",
                   transition: "all 0.2s"
                 }}
-                onClick={() => setStatusFilter("Converted")}
+                onClick={() => setSuperAdminFilter("Converted")}
               >
                 <div className="card-body d-flex align-items-center justify-content-between p-4">
                   <div>
                     <div className="small opacity-80 fw-semibold">Converted Leads</div>
-                    <div className="fs-2 fw-bold mt-2">{crmStats.summary.convertedLeads}</div>
+                    <div className="fs-2 fw-bold mt-2">{leads.filter(l => l.status === "Converted").length}</div>
                   </div>
-                  <div className="bg-white bg-opacity-20 p-3 rounded-circle" style={{ width: "60px", height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <FaUserCheck size={28} />
+                  <div className="bg-white bg-opacity-20 p-3 rounded-circle" style={{ width: "55px", height: "55px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <FaUserCheck size={24} />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-sm-6 col-xl-3">
+              <div 
+                className="card shadow-sm border-0 h-100" 
+                style={{ 
+                  borderRadius: "15px", 
+                  background: "linear-gradient(135deg, #3A7BD5 0%, #3A6073 100%)", 
+                  color: "white",
+                  cursor: "pointer",
+                  border: superAdminFilter === "Schedule Demo" ? "3px solid rgba(255, 255, 255, 0.9)" : "3px solid transparent",
+                  transform: superAdminFilter === "Schedule Demo" ? "scale(1.02)" : "scale(1)",
+                  transition: "all 0.2s"
+                }}
+                onClick={() => setSuperAdminFilter("Schedule Demo")}
+              >
+                <div className="card-body d-flex align-items-center justify-content-between p-4">
+                  <div>
+                    <div className="small opacity-80 fw-semibold">Schedule Demo</div>
+                    <div className="fs-2 fw-bold mt-2">{leads.filter(l => l.source === "Schedule Demo").length}</div>
+                  </div>
+                  <div className="bg-white bg-opacity-20 p-3 rounded-circle" style={{ width: "55px", height: "55px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <FaCalendarAlt size={22} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-12 col-sm-6 col-xl-3">
               <div 
                 className="card shadow-sm border-0 h-100" 
                 style={{ 
                   borderRadius: "15px", 
                   background: "linear-gradient(135deg, #FFB547 0%, #FF9F05 100%)", 
                   color: "white",
-                  cursor: "pointer",
-                  border: statusFilter === "Converted" ? "3px solid rgba(255, 255, 255, 0.9)" : "3px solid transparent",
-                  transform: statusFilter === "Converted" ? "scale(1.02)" : "scale(1)",
-                  transition: "all 0.2s"
+                  cursor: "default"
                 }}
-                onClick={() => setStatusFilter("Converted")}
               >
                 <div className="card-body d-flex align-items-center justify-content-between p-4">
                   <div>
                     <div className="small opacity-80 fw-semibold">Conversion Rate</div>
-                    <div className="fs-2 fw-bold mt-2">{crmStats.summary.conversionRate}%</div>
+                    <div className="fs-2 fw-bold mt-2">
+                      {leads.length > 0 
+                        ? Number(((leads.filter(l => l.status === "Converted").length / leads.length) * 100).toFixed(2)) 
+                        : 0}%
+                    </div>
                   </div>
-                  <div className="bg-white bg-opacity-20 p-3 rounded-circle" style={{ width: "60px", height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <FaPercent size={24} />
+                  <div className="bg-white bg-opacity-20 p-3 rounded-circle" style={{ width: "55px", height: "55px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <FaPercent size={20} />
                   </div>
                 </div>
               </div>
@@ -512,21 +545,21 @@ const Leads = () => {
                   <small className="text-muted">Gym owners who showed interest via your website</small>
                 </div>
                 <span className="badge bg-primary rounded-pill" style={{ fontSize: '13px', padding: '6px 14px' }}>
-                  {leads.length} Total
+                  {displayLeads.length} Total
                 </span>
               </div>
               <div className="card-body">
                 {loading ? (
                   <div className="text-center py-4"><div className="spinner-border text-primary" /></div>
-                ) : leads.length === 0 ? (
+                ) : displayLeads.length === 0 ? (
                   <div className="text-center py-5">
                     <div style={{ fontSize: '48px', marginBottom: '12px' }}>📭</div>
-                    <p className="text-muted fw-semibold">No leads yet. Share your landing page to get started!</p>
+                    <p className="text-muted fw-semibold">No inquiries found matching this category.</p>
                   </div>
                 ) : (
-                  <div className="table-responsive">
-                    <table className="table table-hover align-middle mb-0" style={{ borderCollapse: 'separate', borderSpacing: '0 8px' }}>
-                      <thead className="bg-light">
+                  <div className="table-responsive" style={{ maxHeight: '420px', overflowY: 'auto' }}>
+                    <table className="table align-middle">
+                      <thead style={{ position: 'sticky', top: 0, zIndex: 1, backgroundColor: '#f8fafc' }}>
                         <tr style={{ borderBottom: '2px solid #edf2f7' }}>
                           <th style={{ fontWeight: '700', color: '#4a5568', fontSize: '13px', padding: '12px 16px' }}>Client Contact Info</th>
                           <th style={{ fontWeight: '700', color: '#4a5568', fontSize: '13px', padding: '12px 16px' }}>Gym & Location</th>
@@ -536,7 +569,7 @@ const Leads = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {leads.map((lead) => {
+                        {displayLeads.map((lead) => {
                           const parseNotes = (notes) => {
                             if (!notes) return { gym: '—', city: '—' };
                             const parts = notes.split('|');
