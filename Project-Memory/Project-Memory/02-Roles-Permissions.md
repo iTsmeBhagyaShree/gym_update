@@ -68,3 +68,17 @@
   - Sub-Admins have a `permissions` array or JSON column in the database.
   - Super Admin can check/uncheck available modules (e.g., Dashboard, Leads, Plans, Branches, Payments).
   - Sub-Admin sees ONLY the menus ticked in their permissions checklist. Access to unchecked routes is blocked at the frontend and backend levels.
+
+---
+
+## Default Staff Login Credentials (Quick Login Accounts)
+
+For easy testing of the various staff roles, the following default accounts have been created in the database (associated with the default Gym Owner \`admin@gmail.com\` of branch ID \`48\`):
+
+| Role | Email Address | Password | Database Table | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **Receptionist** | \`receptionist@gmail.com\` | \`123456\` | \`user\` & \`staff\` | Active |
+| **Housekeeping** | \`housekeeping@gmail.com\` | \`123456\` | \`user\` & \`staff\` | Active |
+| **Personal Trainer** | \`personal@gmail.com\` | \`123456\` | \`user\` & \`staff\` | Active |
+| **General Trainer** | \`generaltrainer1@gym.com\` | \`123456\` | \`user\` & \`staff\` | Active |
+| **Sales Agent** | \`salesagent@gmail.com\` | \`123456\` | \`user\` & \`staff\` | Active |
