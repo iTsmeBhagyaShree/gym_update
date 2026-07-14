@@ -15,16 +15,12 @@ export const uploadToCloudinary = async (file, folder) => {
     const fileObj = Array.isArray(file) ? file[0] : file;
 
     const isImage = fileObj.mimetype.startsWith("image/");
-    const isPdf = fileObj.mimetype === "application/pdf" || fileObj.name?.toLowerCase().endsWith(".pdf");
-    const resourceType = (isImage || isPdf) ? "image" : "raw";
+    const resourceType = isImage ? "image" : "raw";
 
     const uploadOptions = {
       folder,
       resource_type: resourceType,
     };
-    if (isPdf) {
-      uploadOptions.format = "pdf";
-    }
 
     const upload = await cloudinary.uploader.upload(fileObj.tempFilePath, uploadOptions);
 
