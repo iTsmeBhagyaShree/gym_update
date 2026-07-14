@@ -240,6 +240,16 @@ Please log in and begin managing your gym!`;
         message: messageBody,
       });
 
+      // Auto-convert lead
+      try {
+        await pool.query(
+          "UPDATE leads SET status = 'Converted' WHERE email = ? AND leadType = 'SAAS'",
+          [data.email]
+        );
+      } catch (leadErr) {
+        console.error("Failed to auto-convert lead on free trial registration:", leadErr);
+      }
+
       return res.status(201).json({
         success: true,
         message: "Free Trial registered and activated successfully!",
@@ -464,6 +474,16 @@ Please log in and change your password immediately under settings.`;
         }
       } catch (activationErr) {
         console.error("Failed auto-activating user on purchase approval:", activationErr);
+      }
+
+      // Auto-convert lead
+      try {
+        await pool.query(
+          "UPDATE leads SET status = 'Converted' WHERE email = ? AND leadType = 'SAAS'",
+          [data.email]
+        );
+      } catch (leadErr) {
+        console.error("Failed to auto-convert lead on manual purchase approval:", leadErr);
       }
     }
 
