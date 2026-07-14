@@ -232,16 +232,24 @@ export const getAdminBroadcastHistoryService = async (adminId) => {
     `SELECT a.*, u.fullName AS senderName 
      FROM announcement a
      LEFT JOIN user u ON u.id = a.sentBy
-     WHERE a.adminId = ?
+     WHERE a.adminId = ? OR (a.adminId IS NULL AND a.sentBy IN (SELECT id FROM user WHERE roleId = 1))
      ORDER BY a.id DESC`,
     [adminId]
   );
   
-  return rows.map(r => ({
-    ...r,
-    channels: JSON.parse(r.channels),
-    targetRoles: JSON.parse(r.targetRoles)
-  }));
+  return rows.map(r => {
+    let parsedRoles = [];
+    try {
+      parsedRoles = r.targetRoles ? JSON.parse(r.targetRoles) : [];
+    } catch (e) {
+      parsedRoles = [];
+    }
+    return {
+      ...r,
+      channels: JSON.parse(r.channels),
+      targetRoles: parsedRoles
+    };
+  });
 };
 
 export const getUserAnnouncementsService = async (adminId, branchId, roleGroup) => {

@@ -43,8 +43,8 @@ const AnnouncementBanner = () => {
         
         let filtered = list;
         if (role === 'admin') {
-          // Admin only sees announcements of their own account
-          filtered = list.filter(a => a.adminId === user.id || a.adminId === user.adminId);
+          // Admin sees announcements of their own account or superadmin (adminId IS NULL)
+          filtered = list.filter(a => a.adminId === user.id || a.adminId === user.adminId || a.adminId === null);
         }
         
         // Filter to only include announcements from the last 24 hours
