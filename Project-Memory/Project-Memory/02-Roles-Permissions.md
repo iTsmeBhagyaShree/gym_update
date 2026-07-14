@@ -77,6 +77,7 @@ For easy testing of the various staff roles, the following default accounts have
 
 | Role | Email Address | Password | Database Table | Status |
 | :--- | :--- | :--- | :--- | :--- |
+| **Member** | \`member@gmail.com\` | \`123456\` | \`user\` & \`member\` (Active Plan) | Active |
 | **Receptionist** | \`receptionist@gmail.com\` | \`123456\` | \`user\` & \`staff\` | Active |
 | **Housekeeping** | \`housekeeping@gmail.com\` | \`123456\` | \`user\` & \`staff\` | Active |
 | **Personal Trainer** | \`personal@gmail.com\` | \`123456\` | \`user\` & \`staff\` | Active |
