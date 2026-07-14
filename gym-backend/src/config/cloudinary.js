@@ -11,15 +11,27 @@ cloudinary.config({
 
 export const uploadToCloudinary = async (file, folder) => {
   try {
-    // Handle single file or file array
     const fileObj = Array.isArray(file) ? file[0] : file;
 
     const isImage = fileObj.mimetype.startsWith("image/");
     const resourceType = isImage ? "image" : "raw";
 
+    // Extract file extension (e.g., ".pdf")
+    let extension = "";
+    if (fileObj.name && fileObj.name.includes(".")) {
+      extension = fileObj.name.substring(fileObj.name.lastIndexOf("."));
+    } else if (isImage) {
+      extension = ".jpg";
+    } else {
+      extension = ".pdf"; // default fallback for announcements
+    }
+
+    const randomName = Math.random().toString(36).substring(2, 10) + "_" + Date.now();
+
     const uploadOptions = {
       folder,
       resource_type: resourceType,
+      public_id: randomName + extension
     };
 
     const upload = await cloudinary.uploader.upload(fileObj.tempFilePath, uploadOptions);
