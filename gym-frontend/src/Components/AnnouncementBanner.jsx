@@ -26,8 +26,13 @@ const AnnouncementBanner = () => {
         if (res.data?.success) {
           list = res.data.announcements || [];
         }
-      } else if (role === 'admin' || role === 'superadmin' || role === 'manager') {
-        const res = await axiosInstance.get("notif/admin/broadcast/history");
+      } else if (role === 'admin' || role === 'manager') {
+        const res = await axiosInstance.get("/notif/user-announcements?roleGroup=ADMIN");
+        if (res.data?.success) {
+          list = res.data.announcements || [];
+        }
+      } else if (role === 'superadmin') {
+        const res = await axiosInstance.get("notif/broadcast/history");
         if (res.data?.success) {
           list = res.data.history || [];
         }
@@ -42,10 +47,6 @@ const AnnouncementBanner = () => {
         const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
         
         let filtered = list;
-        if (role === 'admin') {
-          // Admin sees announcements of their own account or superadmin (adminId IS NULL)
-          filtered = list.filter(a => a.adminId === user.id || a.adminId === user.adminId || a.adminId === null);
-        }
         
         // Filter to only include announcements from the last 24 hours
         const activeAnnouncements = filtered.filter(a => {
@@ -54,7 +55,8 @@ const AnnouncementBanner = () => {
         });
 
         if (activeAnnouncements.length > 0) {
-          setAnnouncements(activeAnnouncements.slice(0, 5));
+          // Only show the single latest active announcement
+          setAnnouncements(activeAnnouncements.slice(0, 1));
           setVisible(true);
           setDismissed(false);
         } else {

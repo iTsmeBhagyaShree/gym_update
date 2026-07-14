@@ -232,7 +232,7 @@ export const getAdminBroadcastHistoryService = async (adminId) => {
     `SELECT a.*, u.fullName AS senderName 
      FROM announcement a
      LEFT JOIN user u ON u.id = a.sentBy
-     WHERE a.adminId = ? OR (a.adminId IS NULL AND a.sentBy IN (SELECT id FROM user WHERE roleId = 1))
+     WHERE a.adminId = ?
      ORDER BY a.id DESC`,
     [adminId]
   );
@@ -253,27 +253,54 @@ export const getAdminBroadcastHistoryService = async (adminId) => {
 };
 
 export const getUserAnnouncementsService = async (adminId, branchId, roleGroup) => {
-  // roleGroup is either 'MEMBERS' or 'STAFF'
+  let query = "";
+  let params = [];
   
-  let query = `
-     SELECT a.*, u.fullName AS senderName 
-     FROM announcement a
-     LEFT JOIN user u ON u.id = a.sentBy
-     WHERE a.adminId = ?
-     ORDER BY a.createdAt DESC
-  `;
-  const params = [adminId];
+  if (roleGroup === 'ADMIN') {
+    // Admins see their own announcements AND system-wide superadmin announcements
+    query = `
+       SELECT a.*, u.fullName AS senderName 
+       FROM announcement a
+       LEFT JOIN user u ON u.id = a.sentBy
+       WHERE a.adminId = ? OR (a.adminId IS NULL AND a.sentBy IN (SELECT id FROM user WHERE roleId = 1))
+       ORDER BY a.createdAt DESC
+    `;
+    params = [adminId];
+  } else {
+    // Members and staff see only their own gym's announcements
+    query = `
+       SELECT a.*, u.fullName AS senderName 
+       FROM announcement a
+       LEFT JOIN user u ON u.id = a.sentBy
+       WHERE a.adminId = ?
+       ORDER BY a.createdAt DESC
+    `;
+    params = [adminId];
+  }
 
   const [rows] = await pool.query(query, params);
   
-  const announcements = rows.map(r => ({
-    ...r,
-    channels: JSON.parse(r.channels),
-    targetRoles: JSON.parse(r.targetRoles)
-  }));
+  const announcements = rows.map(r => {
+    let parsedRoles = [];
+    try {
+      parsedRoles = r.targetRoles ? JSON.parse(r.targetRoles) : [];
+    } catch (e) {
+      parsedRoles = [];
+    }
+    return {
+      ...r,
+      channels: JSON.parse(r.channels),
+      targetRoles: parsedRoles
+    };
+  });
 
-  // Filter based on roleGroup
-  return announcements.filter(a => a.targetRoles.includes(roleGroup));
+  if (roleGroup === 'ADMIN') {
+    // Filter to own announcements OR superadmin announcements targeting Admins (roleId 2)
+    return announcements.filter(a => a.adminId === adminId || a.targetRoles.includes(2) || a.targetRoles.includes("2"));
+  } else {
+    // Filter to roleGroup (MEMBERS or STAFF)
+    return announcements.filter(a => a.targetRoles.includes(roleGroup));
+  }
 };
 
 // ─────────────────────────────────────────────────────────
