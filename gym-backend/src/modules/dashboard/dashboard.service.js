@@ -296,7 +296,8 @@ export const superAdminCRMStatsService = async () => {
     `SELECT 
       COUNT(*) AS totalLeads,
       SUM(CASE WHEN status = 'Converted' THEN 1 ELSE 0 END) AS convertedLeads
-     FROM leads`
+     FROM leads
+     WHERE leadType = 'SAAS'`
   );
 
   const totalLeads = Number(leadStats.totalLeads || 0);
@@ -314,6 +315,7 @@ export const superAdminCRMStatsService = async () => {
      FROM leads l
      LEFT JOIN user u ON l.adminId = u.id
      LEFT JOIN branch b ON l.branchId = b.id
+     WHERE l.leadType = 'SAAS'
      GROUP BY l.adminId, l.branchId
      ORDER BY totalLeads DESC`
   );
@@ -331,7 +333,7 @@ export const superAdminCRMStatsService = async () => {
      LEFT JOIN leads l ON l.assignedToStaffId = s.id
      LEFT JOIN user u ON s.adminId = u.id
      LEFT JOIN branch b ON s.branchId = b.id
-     WHERE s.roleId IN (3, 5, 6, 7)
+     WHERE s.roleId IN (3, 5, 6, 7) AND l.leadType = 'SAAS'
      GROUP BY s.id
      ORDER BY convertedLeads DESC
      LIMIT 10`
@@ -344,7 +346,7 @@ export const superAdminCRMStatsService = async () => {
       COUNT(*) AS totalLeads,
       SUM(CASE WHEN status = 'Converted' THEN 1 ELSE 0 END) AS convertedLeads
      FROM leads
-     WHERE createdAt >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+     WHERE createdAt >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND leadType = 'SAAS'
      GROUP BY DATE(createdAt)
      ORDER BY date ASC`
   );
