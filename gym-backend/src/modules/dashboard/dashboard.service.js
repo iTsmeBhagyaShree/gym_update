@@ -186,18 +186,18 @@ export const superAdminDashboardService = async (branchId = null) => {
   // 1️⃣ TOTAL REVENUE
   // ================================
   const [[totalRev]] = await pool.query(
-    `SELECT SUM(amountPaid) AS totalRevenue FROM member m WHERE 1=1 ${getBranchFilter('m')}`
+    `SELECT COALESCE(SUM(amount), 0) AS totalRevenue FROM purchase WHERE status = 'approved'`
   );
 
   // ================================
   // 2️⃣ MONTHLY REVENUE
   // ================================
   const [[monthlyRev]] = await pool.query(
-    `SELECT SUM(amountPaid) AS monthlyRevenue 
-     FROM member m
-     WHERE MONTH(membershipFrom) = MONTH(CURRENT_DATE()) 
-       AND YEAR(membershipFrom) = YEAR(CURRENT_DATE())
-       ${getBranchFilter('m')}`
+    `SELECT COALESCE(SUM(amount), 0) AS monthlyRevenue 
+     FROM purchase 
+     WHERE status = 'approved' 
+       AND MONTH(startDate) = MONTH(CURRENT_DATE()) 
+       AND YEAR(startDate) = YEAR(CURRENT_DATE())`
   );
 
   // ================================
@@ -243,14 +243,14 @@ export const superAdminDashboardService = async (branchId = null) => {
   // Get daily revenue of current month
   const [revRows] = await pool.query(
     `SELECT 
-    DAY(joinDate) AS day,
-    SUM(amountPaid) AS revenue
-FROM member m
-WHERE MONTH(joinDate) = MONTH(CURRENT_DATE())
-  AND YEAR(joinDate) = YEAR(CURRENT_DATE())
-  ${getBranchFilter('m')}
-GROUP BY DAY(joinDate)
-ORDER BY DAY(joinDate)
+    DAY(startDate) AS day,
+    COALESCE(SUM(amount), 0) AS revenue
+FROM purchase
+WHERE status = 'approved'
+  AND MONTH(startDate) = MONTH(CURRENT_DATE())
+  AND YEAR(startDate) = YEAR(CURRENT_DATE())
+GROUP BY DAY(startDate)
+ORDER BY DAY(startDate)
 `
   );
 
