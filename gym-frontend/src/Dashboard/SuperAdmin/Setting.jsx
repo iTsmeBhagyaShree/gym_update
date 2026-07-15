@@ -62,8 +62,8 @@ const AdminSettings = () => {
           phone: userData.phone || '',
         }));
         
-        if (userData.profilePhoto) {
-          setProfilePhotoUrl(userData.profilePhoto);
+        if (userData.profileImage) {
+          setProfilePhotoUrl(userData.profileImage);
         }
 
         // Fetch global settings
@@ -176,22 +176,22 @@ const handleSubmit = async (e) => {
 
   try {
     const requests = [];
-
-    // 📌 1. Profile update (if any field changed from initial/fetched values)
-    // But since you always overwrite from form state (even if unchanged), safer to compare with what backend had.
-    // For simplicity, assume: if user typed something, send it (trim empty to null/keep existing).
-    const profilePayload = {
-      fullName: settingsData.fullName.trim() || '',
-      email: settingsData.email.trim() || '',
-      phone: (settingsData.phone || '').trim(),
-    };
-
-    // Only send profile update if *something* changed (non-empty or different from current)
-    // To be precise, you’d compare with original values — but for now, just send if valid
-    if (profilePayload.fullName || profilePayload.email || profilePayload.phone) {
-      requests.push(
-        axiosInstance.put(`/auth/user/${userId}`, profilePayload)
-      );
+    let profilePromise = null;
+    if (settingsData.fullName.trim() || settingsData.email.trim() || (settingsData.phone || '').trim() || settingsData.profilePhoto) {
+      const formData = new FormData();
+      formData.append("fullName", settingsData.fullName.trim());
+      formData.append("email", settingsData.email.trim());
+      formData.append("phone", (settingsData.phone || '').trim());
+      if (settingsData.profilePhoto instanceof File) {
+        formData.append("profileImage", settingsData.profilePhoto);
+      }
+      
+      profilePromise = axiosInstance.put(`/auth/user/${userId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      requests.push(profilePromise);
     }
 
     // 📌 2. Password change (only if ALL 3 fields are non-empty after trim)
@@ -200,19 +200,19 @@ const handleSubmit = async (e) => {
     const confirmP = settingsData.confirmNewPassword.trim();
 
     if (oldP && newP && confirmP) {
-  if (newP !== confirmP) {
-    alert('New passwords do not match.');
-    return;
-  }
+      if (newP !== confirmP) {
+        alert('New passwords do not match.');
+        return;
+      }
 
-  const passwordPromise = axios.put(`${BaseUrl}/auth/changepassword`, {
-    id: userId,          // 🔑 CRITICAL — add user ID
-    oldPassword: oldP,
-    newPassword: newP
-  });
-  requests.push(passwordPromise);
-}
-     else if (oldP || newP || confirmP) {
+      const passwordPromise = axios.put(`${BaseUrl}/auth/changepassword`, {
+        id: userId,          // 🔑 CRITICAL — add user ID
+        oldPassword: oldP,
+        newPassword: newP
+      });
+      requests.push(passwordPromise);
+    }
+    else if (oldP || newP || confirmP) {
       // ⚠ Partial input
       alert('To change password, please fill all three password fields.');
       return;
@@ -226,7 +226,30 @@ const handleSubmit = async (e) => {
     }
 
     // Wait for all to complete
-    await Promise.all(requests);
+    const responses = await Promise.all(requests);
+
+    // If profile was updated, find its response to update localStorage
+    if (profilePromise) {
+      const profileIndex = requests.indexOf(profilePromise);
+      const profileRes = responses[profileIndex];
+      if (profileRes && profileRes.data && profileRes.data.user) {
+        const updatedUser = profileRes.data.user;
+        const currentLocalUser = JSON.parse(localStorage.getItem("user") || "{}");
+        const mergedUser = {
+          ...currentLocalUser,
+          fullName: updatedUser.fullName,
+          email: updatedUser.email,
+          phone: updatedUser.phone,
+          profileImage: updatedUser.profileImage,
+        };
+        localStorage.setItem("user", JSON.stringify(mergedUser));
+        localStorage.setItem("userEmail", updatedUser.email);
+
+        if (updatedUser.profileImage) {
+          setProfilePhotoUrl(updatedUser.profileImage);
+        }
+      }
+    }
 
     // ✅ Success!
     setShowSaveMessage(true);
