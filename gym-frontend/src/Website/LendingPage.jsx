@@ -894,7 +894,7 @@ const LendingPage = () => {
                   </div>
                   <p>"This system has transformed how we run our gym. Member retention has increased by 40% since implementation."</p>
                   <div className="author">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author" className="author-avatar" />
+                    <img src={testimonialRahul} alt="Author" className="author-avatar" />
                     <div className="author-info">
                       <div className="author-name">Rahul Sharma</div>
                       <div className="author-role">Gym Owner</div>
