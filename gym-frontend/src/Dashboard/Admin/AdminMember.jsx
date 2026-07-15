@@ -108,6 +108,7 @@ const AdminMember = () => {
     profileImage: null, // Store file object directly
     profileImagePreview: "", // For preview
     goal: "",
+    trainerId: "",
   });
 
   const [editMember, setEditMember] = useState({
@@ -129,6 +130,7 @@ const AdminMember = () => {
     profileImagePreview: "", // For preview
     existingProfileImage: "", // Store existing image URL
     goal: "",
+    trainerId: "",
   });
 
   const [renewPlan, setRenewPlan] = useState({
@@ -547,6 +549,21 @@ const AdminMember = () => {
       );
 
       if (response.data) {
+        const createdMemberId = response.data.data?.memberId;
+
+        // If personal trainer is selected, assign it
+        if (newMember.interestedIn === "Personal Training" && newMember.trainerId && createdMemberId) {
+          try {
+            await axiosInstance.post(`${BaseUrl}members/assign-trainer`, {
+              memberId: createdMemberId,
+              trainerId: parseInt(newMember.trainerId),
+              adminId,
+            });
+          } catch (trainerErr) {
+            console.error("Failed to automatically assign trainer:", trainerErr);
+          }
+        }
+
         // Automatically mark the lead as Converted if this came from a lead
         if (convertedLeadId) {
           try {
@@ -578,6 +595,7 @@ const AdminMember = () => {
           profileImage: null,
           profileImagePreview: "",
           goal: "",
+          trainerId: "",
         });
         setNewGoalType("");
 
@@ -654,6 +672,19 @@ const AdminMember = () => {
       );
 
       if (response.data?.success) {
+        // If personal trainer is selected, assign it
+        if (editMember.interestedIn === "Personal Training" && editMember.trainerId) {
+          try {
+            await axiosInstance.post(`${BaseUrl}members/assign-trainer`, {
+              memberId: editMember.id,
+              trainerId: parseInt(editMember.trainerId),
+              adminId,
+            });
+          } catch (trainerErr) {
+            console.error("Failed to automatically assign trainer:", trainerErr);
+          }
+        }
+
         // Refresh members list to get updated data
         await fetchMembersByAdminId();
 
@@ -729,7 +760,6 @@ const AdminMember = () => {
       const goalVal = member.goal || memberDetails.goal || "";
       setEditGoalType(["Weight Loss", "Weight Gain", "Body Building"].includes(goalVal) ? goalVal : (goalVal ? "Other" : ""));
 
-      // Use the member data directly from the list
       setEditMember({
         id: member.id,
         fullName: member.name,
@@ -749,6 +779,7 @@ const AdminMember = () => {
         profileImagePreview: member.profileImage || "",
         existingProfileImage: member.profileImage || "",
         goal: goalVal,
+        trainerId: memberDetails.trainerId || "",
       });
       setShowEditForm(true);
     } catch (error) {
@@ -2185,6 +2216,30 @@ const handleDownloadReceipt = async (member) => {
                         </div>
                       </div>
                     </div>
+                    {newMember.interestedIn === "Personal Training" && (
+                      <div className="col-12 mt-2">
+                        <label className="form-label fw-semibold">
+                          Select Personal Trainer
+                        </label>
+                        <select
+                          className="form-select"
+                          value={newMember.trainerId}
+                          onChange={(e) =>
+                            setNewMember({
+                              ...newMember,
+                              trainerId: e.target.value,
+                            })
+                          }
+                        >
+                          <option value="">-- Select Trainer --</option>
+                          {personalTrainers.map((t) => (
+                            <option key={t.staffId} value={t.staffId}>
+                              {t.fullName || t.name} ({t.phone || "No phone"})
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
                     <div className="col-12">
                       <label className="form-label">Address</label>
                       <textarea
@@ -2599,6 +2654,30 @@ const handleDownloadReceipt = async (member) => {
                         </div>
                       </div>
               </div>
+              {editMember.interestedIn === "Personal Training" && (
+                <div className="col-12 mt-2">
+                  <label className="form-label fw-semibold">
+                    Select Personal Trainer
+                  </label>
+                  <select
+                    className="form-select"
+                    value={editMember.trainerId}
+                    onChange={(e) =>
+                      setEditMember({
+                        ...editMember,
+                        trainerId: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="">-- Select Trainer --</option>
+                    {personalTrainers.map((t) => (
+                      <option key={t.staffId} value={t.staffId}>
+                        {t.fullName || t.name} ({t.phone || "No phone"})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
               <div className="col-12">
                 <label className="form-label">
                   Plans <span className="text-danger">*</span>
