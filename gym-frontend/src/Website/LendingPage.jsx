@@ -12,6 +12,9 @@ import './LendingPage.css';
 import BaseUrl from '../Api/BaseUrl';
 import Logo from "../assets/Logo/Logo1.png";
 import Snowfall from "react-snowfall";
+import testimonialRahul from "../assets/testimonials/rahul.png";
+import testimonialPriya from "../assets/testimonials/priya.png";
+import testimonialVikram from "../assets/testimonials/vikram.png";
 
 const LendingPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -404,21 +407,21 @@ const LendingPage = () => {
       role: "Gym Owner",
       content: "This system has transformed how we run our gym. Member retention has increased by 40% since implementation.",
       rating: 5,
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+      avatar: testimonialRahul
     },
     {
       name: "Priya Patel",
       role: "Fitness Manager",
       content: "The scheduling and reporting features save us hours each week. Our trainers love the mobile app!",
       rating: 5,
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+      avatar: testimonialPriya
     },
     {
       name: "Vikram Singh",
       role: "Gym Member",
       content: "Booking classes and tracking my progress has never been easier. The app is intuitive and powerful.",
       rating: 4,
-      avatar: "https://randomuser.me/api/portraits/men/67.jpg"
+      avatar: testimonialVikram
     }
   ];
 
