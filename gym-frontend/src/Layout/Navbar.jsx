@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaBell, FaUserCircle, FaBars } from "react-icons/fa";
-import Logo from "../assets/Logo/Logo.png"; // Default fallback logo
+const Logo = "/logo.png"; // Default fallback logo
 import Account from "../Dashboard/Member/Account";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../Api/axiosInstance";

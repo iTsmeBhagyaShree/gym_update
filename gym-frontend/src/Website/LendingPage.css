@@ -83,8 +83,8 @@ body {
 }
 
 .nav-logo {
-  height: 50px;
-  width: 230px;
+  height: 75px;
+  width: 280px;
   object-fit: contain;
 }
 
@@ -127,8 +127,8 @@ body {
   }
 
   .nav-logo {
-    height: 40px;
-    width: 150px;
+    height: 55px;
+    width: 200px;
   }
 }
 
@@ -1409,4 +1409,109 @@ body {
 }
 
 }
+
+/* ==========================================================================
+   🔵 SCOPED LANDING PAGE BLUE BACKGROUND & WHITE FONTS CUSTOM OVERRIDES
+   ========================================================================== */
+.landing-page {
+  background: linear-gradient(135deg, #07162c 0%, #112d55 50%, #07162c 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Ensure all sub-sections have a transparent background so the main blue shines through */
+.landing-page .hero-section,
+.landing-page .features-section,
+.landing-page .benefits-section,
+.landing-page .stats-section,
+.landing-page .testimonials-section,
+.landing-page .pricing-section,
+.landing-page .cta-section,
+.landing-page .contact-section {
+  background: transparent !important;
+}
+
+/* Make pricing cards, feature cards, and testimonial cards dark blue/navy */
+.landing-page .pricing-card,
+.landing-page .feature-card .card,
+.landing-page .testimonial-card,
+.landing-page .stat-card {
+  background-color: #122c53 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  color: #ffffff !important;
+}
+
+/* Ensure pricing header has clear legibility */
+.landing-page .pricing-header h3 {
+  color: #0099ff !important;
+}
+
+/* Popular pricing card highlighted border */
+.landing-page .pricing-card.popular {
+  border: 2px solid #0099ff !important;
+}
+
+/* Force all text, headers, quotes, and links to white or primary blue */
+.landing-page h1,
+.landing-page h2,
+.landing-page h3,
+.landing-page h4,
+.landing-page h5,
+.landing-page h6,
+.landing-page p,
+.landing-page li,
+.landing-page span,
+.landing-page div:not(.form-check):not(.form-switch),
+.landing-page a:not(.btn):not(.demo-btn),
+.landing-page .section-title,
+.landing-page .subtitle,
+.landing-page .stat-number,
+.landing-page .stat-label,
+.landing-page .feature-title,
+.landing-page .card-text,
+.landing-page .testimonial-content,
+.landing-page .author-name,
+.landing-page .author-role,
+.landing-page .pricing-card ul li {
+  color: #ffffff !important;
+}
+
+/* Nav Link overrides */
+.landing-page .nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.landing-page .nav-link:hover {
+  color: #0099ff !important;
+}
+
+/* Make sure input fields and labels stay readable on dark background */
+.landing-page label.form-label {
+  color: #ffffff !important;
+}
+.landing-page input.form-control,
+.landing-page textarea.form-control {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+.landing-page input.form-control::placeholder,
+.landing-page textarea.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Navbar styling */
+.landing-page .navbar {
+  background-color: rgba(7, 22, 44, 0.8) !important;
+  backdrop-filter: blur(15px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.landing-page .navbar.scrolled {
+  background-color: rgba(7, 22, 44, 0.95) !important;
+}
+
+/* Quote Icon override */
+.landing-page .quote-icon {
+  color: rgba(255, 255, 255, 0.15) !important;
+}
+
 
