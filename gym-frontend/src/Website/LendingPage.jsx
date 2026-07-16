@@ -10,7 +10,7 @@ import { FiChevronDown, FiCheck as FiCheckIcon, FiArrowRight as FiArrowRightIcon
 import { Button, Container, Row, Col, Card } from 'react-bootstrap';
 import './LendingPage.css';
 import BaseUrl from '../Api/BaseUrl';
-import Logo from "../assets/Logo/Logo1.png";
+const Logo = "/logo.png";
 import Snowfall from "react-snowfall";
 import testimonialRahul from "../assets/testimonials/rahul.png";
 import testimonialPriya from "../assets/testimonials/priya.png";
