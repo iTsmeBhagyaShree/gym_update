@@ -1477,9 +1477,10 @@ body {
   color: #ffffff !important;
 }
 
-/* Nav Link overrides - RESTORED TO DARK TEXT FOR WHITE NAVBAR CONTRAST */
+/* Nav Link overrides - SET TO BLUE FOR PREMIUM BRAND MATCH */
 .landing-page .nav-link {
-  color: #333 !important;
+  color: #0055ff !important;
+  font-weight: 600 !important;
 }
 .landing-page .nav-link:hover {
   color: #0099ff !important;
@@ -1500,14 +1501,14 @@ body {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Navbar styling - RESTORED TO ORIGINAL WHITE BACKGROUND FOR LOGO CONTRAST */
+/* Navbar styling - SET TO PURE WHITE FOR LOGO CONTAINER CONTRAST */
 .landing-page .navbar {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  backdrop-filter: blur(15px) !important;
+  background-color: #ffffff !important;
+  backdrop-filter: none !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
 .landing-page .navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.95) !important;
+  background-color: #ffffff !important;
 }
 
 /* Footer styling - SET TO PREMIUM DARK BLUE */
