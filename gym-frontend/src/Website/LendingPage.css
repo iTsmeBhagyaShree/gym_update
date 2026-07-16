@@ -1434,7 +1434,8 @@ body {
 .landing-page .pricing-card,
 .landing-page .feature-card .card,
 .landing-page .testimonial-card,
-.landing-page .stat-card {
+.landing-page .stat-card,
+.landing-page .testimonial-preview {
   background-color: #122c53 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
@@ -1461,8 +1462,8 @@ body {
 .landing-page p,
 .landing-page li,
 .landing-page span,
-.landing-page div:not(.form-check):not(.form-switch),
-.landing-page a:not(.btn):not(.demo-btn),
+.landing-page div:not(.form-check):not(.form-switch):not(.nav-container):not(.navbar-brand):not(.nav-left):not(.nav-center):not(.nav-right),
+.landing-page a:not(.btn):not(.demo-btn):not(.nav-link),
 .landing-page .section-title,
 .landing-page .subtitle,
 .landing-page .stat-number,
@@ -1476,9 +1477,9 @@ body {
   color: #ffffff !important;
 }
 
-/* Nav Link overrides */
+/* Nav Link overrides - RESTORED TO DARK TEXT FOR WHITE NAVBAR CONTRAST */
 .landing-page .nav-link {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: #333 !important;
 }
 .landing-page .nav-link:hover {
   color: #0099ff !important;
@@ -1499,14 +1500,19 @@ body {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Navbar styling */
+/* Navbar styling - RESTORED TO ORIGINAL WHITE BACKGROUND FOR LOGO CONTRAST */
 .landing-page .navbar {
-  background-color: rgba(7, 22, 44, 0.8) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
   backdrop-filter: blur(15px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
 .landing-page .navbar.scrolled {
-  background-color: rgba(7, 22, 44, 0.95) !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Footer styling - SET TO PREMIUM DARK BLUE */
+.landing-page .footer {
+  background-color: #07162c !important;
 }
 
 /* Quote Icon override */
